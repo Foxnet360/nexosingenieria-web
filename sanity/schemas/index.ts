@@ -1,0 +1,7 @@
+export { default as page } from './page'
+export { default as post } from './post'
+export { default as service } from './service'
+export { default as industry } from './industry'
+export { default as caseStudy } from './caseStudy'
+export { default as leadMagnet } from './leadMagnet'
+export { default as formSubmission } from './formSubmission'
