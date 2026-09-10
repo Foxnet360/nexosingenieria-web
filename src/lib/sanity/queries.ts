@@ -1,4 +1,5 @@
-import { client } from './client'
+import { client } from './client';
+import { safeSanityFetch, staticFallbacks } from './fetch';
 
 export const postsQuery = `
   *[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
@@ -13,7 +14,7 @@ export const postsQuery = `
     author,
     "estimatedReadingTime": round(length(pt::text(content)) / 5 / 180)
   }
-`
+`;
 
 export const postQuery = `
   *[_type == "post" && slug.current == $slug][0] {
@@ -31,7 +32,7 @@ export const postQuery = `
     metaDescription,
     "estimatedReadingTime": round(length(pt::text(content)) / 5 / 180)
   }
-`
+`;
 
 export const relatedPostsQuery = `
   *[_type == "post" && slug.current != $slug && category == $category] | order(publishedAt desc) [0...3] {
@@ -42,7 +43,7 @@ export const relatedPostsQuery = `
     coverImage,
     publishedAt
   }
-`
+`;
 
 export const servicesQuery = `
   *[_type == "service" && defined(slug.current)] | order(title asc) {
@@ -54,7 +55,7 @@ export const servicesQuery = `
     isPillar,
     "image": content[_type == "image"][0]
   }
-`
+`;
 
 export const serviceQuery = `
   *[_type == "service" && slug.current == $slug][0] {
@@ -70,7 +71,7 @@ export const serviceQuery = `
     metaTitle,
     metaDescription
   }
-`
+`;
 
 export const pillarServicesQuery = `
   *[_type == "service" && isPillar == true] | order(title asc) {
@@ -80,7 +81,7 @@ export const pillarServicesQuery = `
     description,
     icon
   }
-`
+`;
 
 export const industriesQuery = `
   *[_type == "industry" && defined(slug.current)] | order(title asc) {
@@ -90,7 +91,7 @@ export const industriesQuery = `
     description,
     icon
   }
-`
+`;
 
 export const industryQuery = `
   *[_type == "industry" && slug.current == $slug][0] {
@@ -111,7 +112,7 @@ export const industryQuery = `
     metaTitle,
     metaDescription
   }
-`
+`;
 
 export const caseStudiesQuery = `
   *[_type == "caseStudy" && defined(slug.current)] | order(publishedAt desc) {
@@ -125,7 +126,7 @@ export const caseStudiesQuery = `
     results,
     publishedAt
   }
-`
+`;
 
 export const caseStudyQuery = `
   *[_type == "caseStudy" && slug.current == $slug][0] {
@@ -141,7 +142,7 @@ export const caseStudyQuery = `
     coverImage,
     publishedAt
   }
-`
+`;
 
 export const leadMagnetsQuery = `
   *[_type == "leadMagnet" && defined(slug.current)] | order(title asc) {
@@ -152,7 +153,7 @@ export const leadMagnetsQuery = `
     description,
     ctaText
   }
-`
+`;
 
 export const leadMagnetQuery = `
   *[_type == "leadMagnet" && slug.current == $slug][0] {
@@ -167,52 +168,58 @@ export const leadMagnetQuery = `
     ctaText,
     thankYouMessage
   }
-`
+`;
 
 export async function getPosts() {
-  return client.fetch(postsQuery)
+  return safeSanityFetch(postsQuery, {}, []);
 }
 
 export async function getPost(slug: string) {
-  return client.fetch(postQuery, { slug })
+  return safeSanityFetch(postQuery, { slug }, null);
 }
 
 export async function getRelatedPosts(slug: string, category: string) {
-  return client.fetch(relatedPostsQuery, { slug, category })
+  return safeSanityFetch(relatedPostsQuery, { slug, category }, []);
 }
 
 export async function getServices() {
-  return client.fetch(servicesQuery)
+  return safeSanityFetch(servicesQuery, {}, staticFallbacks.services);
 }
 
 export async function getService(slug: string) {
-  return client.fetch(serviceQuery, { slug })
+  const fallback = staticFallbacks.services.find(s => s.slug.current === slug) || null;
+  return safeSanityFetch(serviceQuery, { slug }, fallback);
 }
 
 export async function getPillarServices() {
-  return client.fetch(pillarServicesQuery)
+  return safeSanityFetch(
+    pillarServicesQuery,
+    {},
+    staticFallbacks.services.filter(s => s.isPillar)
+  );
 }
 
 export async function getIndustries() {
-  return client.fetch(industriesQuery)
+  return safeSanityFetch(industriesQuery, {}, []);
 }
 
 export async function getIndustry(slug: string) {
-  return client.fetch(industryQuery, { slug })
+  return safeSanityFetch(industryQuery, { slug }, null);
 }
 
 export async function getCaseStudies() {
-  return client.fetch(caseStudiesQuery)
+  return safeSanityFetch(caseStudiesQuery, {}, staticFallbacks.projects);
 }
 
 export async function getCaseStudy(slug: string) {
-  return client.fetch(caseStudyQuery, { slug })
+  const fallback = staticFallbacks.projects.find(p => p.slug.current === slug) || null;
+  return safeSanityFetch(caseStudyQuery, { slug }, fallback);
 }
 
 export async function getLeadMagnets() {
-  return client.fetch(leadMagnetsQuery)
+  return safeSanityFetch(leadMagnetsQuery, {}, []);
 }
 
 export async function getLeadMagnet(slug: string) {
-  return client.fetch(leadMagnetQuery, { slug })
+  return safeSanityFetch(leadMagnetQuery, { slug }, null);
 }

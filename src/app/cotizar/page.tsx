@@ -6,31 +6,19 @@ import { Check } from '@phosphor-icons/react';
 import { Section } from '@/components/ui/Section';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
 import { Button } from '@/components/ui/Button';
-import { sendEmail } from '@/lib/emailjs';
+import { processQuoteForm, FormResponse } from '@/lib/forms/handlers';
 import { analytics } from '@/lib/analytics';
 
 export default function CotizarPage() {
-  const [state, setState] = useState<{ success: boolean; message: string } | null>(null);
+  const [state, setState] = useState<FormResponse | null>(null);
   const [isPending, setIsPending] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsPending(true);
-    
+
     const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      company: formData.get('company') as string || '',
-      phone: formData.get('phone') as string || '',
-      service: formData.get('service') as string || '',
-      projectSize: formData.get('projectSize') as string || '',
-      budget: formData.get('budget') as string || '',
-      message: formData.get('message') as string,
-      page: 'Cotizar',
-    };
-    
-    const result = await sendEmail(data);
+    const result = await processQuoteForm(formData);
     analytics.formSubmit('cotizar', result.success);
     setState(result);
     setIsPending(false);
@@ -69,31 +57,67 @@ export default function CotizarPage() {
 
   return (
     <>
-      <Section background="secondary" padding="xl">
-        <div className="max-w-4xl mx-auto">
+      {/* Hero Banner */}
+      <section className="relative min-h-[42vh] flex items-center justify-center pt-24 pb-16 overflow-hidden bg-bg-secondary border-b border-border">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/images/hero-soluciones.webp"
+            alt="Solicitar Cotización Nexos Ingeniería"
+            className="w-full h-full object-cover object-center opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/80 to-transparent" />
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <AnimatedElement animation="fade-in">
-            <div className="text-center mb-12">
-              <p className="text-accent font-medium mb-4 tracking-wide uppercase text-sm">
-                Solicitar Cotización
-              </p>
-              <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-4 font-[family-name:var(--font-geist-sans)]">
-                Cuéntanos sobre tu proyecto
-              </h1>
-              <p className="text-text-secondary">
-                Completa el formulario y te enviaremos una propuesta personalizada en menos de 48 horas.
-              </p>
-            </div>
+            <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-semibold uppercase tracking-wider mb-4 backdrop-blur-md">
+              Propuestas a Medida
+            </span>
           </AnimatedElement>
 
+          <AnimatedElement animation="slide-up" delay={100}>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-4 font-[family-name:var(--font-geist-sans)]">
+              Cotizá tu Proyecto
+            </h1>
+          </AnimatedElement>
+
+          <AnimatedElement animation="slide-up" delay={200}>
+            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+              Contanos sobre tu necesidad técnica o arquitectónica y recibí un presupuesto detallado
+              sin compromiso en menos de 48 horas.
+            </p>
+          </AnimatedElement>
+        </div>
+      </section>
+
+      <Section background="default" padding="xl">
+        <div className="max-w-4xl mx-auto">
           <AnimatedElement animation="slide-up" delay={100}>
             <form
               onSubmit={handleSubmit}
               className="bg-bg-card border border-border rounded-xl p-8 space-y-6"
             >
+              {/* Honeypot field for bot protection */}
+              <input
+                type="text"
+                name="website_hp"
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+
+              {state?.success === false && (
+                <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm">
+                  {state.message}
+                </div>
+              )}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-text-primary mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-text-primary mb-2"
+                  >
                     Nombre completo *
                   </label>
                   <input
@@ -103,11 +127,14 @@ export default function CotizarPage() {
                     required
                     className="w-full px-4 py-3 bg-bg-secondary border border-border rounded-lg text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent transition-colors motion-reduce:transition-none"
                     placeholder="Tu nombre"
-                  /                  >
+                  />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-text-primary mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-text-primary mb-2"
+                  >
                     Correo electrónico *
                   </label>
                   <input
@@ -123,7 +150,10 @@ export default function CotizarPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="company" className="block text-sm font-medium text-text-primary mb-2">
+                  <label
+                    htmlFor="company"
+                    className="block text-sm font-medium text-text-primary mb-2"
+                  >
                     Empresa
                   </label>
                   <input
@@ -136,7 +166,10 @@ export default function CotizarPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-text-primary mb-2">
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-text-primary mb-2"
+                  >
                     Teléfono
                   </label>
                   <input
@@ -151,7 +184,10 @@ export default function CotizarPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="service" className="block text-sm font-medium text-text-primary mb-2">
+                  <label
+                    htmlFor="service"
+                    className="block text-sm font-medium text-text-primary mb-2"
+                  >
                     Servicio de interés *
                   </label>
                   <select
@@ -167,11 +203,14 @@ export default function CotizarPage() {
                     <option value="audio-video">Audio y Video</option>
                     <option value="domotica">Domótica</option>
                     <option value="multiple">Múltiples servicios</option>
-                  </select                  >
+                  </select>
                 </div>
 
                 <div>
-                  <label htmlFor="projectSize" className="block text-sm font-medium text-text-primary mb-2">
+                  <label
+                    htmlFor="projectSize"
+                    className="block text-sm font-medium text-text-primary mb-2"
+                  >
                     Tamaño del proyecto
                   </label>
                   <select
@@ -189,7 +228,10 @@ export default function CotizarPage() {
               </div>
 
               <div>
-                <label htmlFor="budget" className="block text-sm font-medium text-text-primary mb-2">
+                <label
+                  htmlFor="budget"
+                  className="block text-sm font-medium text-text-primary mb-2"
+                >
                   Presupuesto estimado
                 </label>
                 <select
@@ -206,26 +248,24 @@ export default function CotizarPage() {
                 </select>
               </div>
 
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-text-primary mb-2">
-                    Descripción del proyecto *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    required
-                    className="w-full px-4 py-3 bg-bg-secondary border border-border rounded-lg text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent transition-colors resize-none motion-reduce:transition-none"
-                    placeholder="Describe tu proyecto, necesidades específicas, ubicación, cantidad de puntos de red, cámaras, etc."
-                  ></textarea>
-                </div>
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-text-primary mb-2"
+                >
+                  Descripción del proyecto *
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  required
+                  className="w-full px-4 py-3 bg-bg-secondary border border-border rounded-lg text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent transition-colors resize-none motion-reduce:transition-none"
+                  placeholder="Describe tu proyecto, necesidades específicas, ubicación, cantidad de puntos de red, cámaras, etc."
+                ></textarea>
+              </div>
 
-              <Button
-                type="submit"
-                className="w-full"
-                isLoading={isPending}
-                disabled={isPending}
-              >
+              <Button type="submit" className="w-full" isLoading={isPending} disabled={isPending}>
                 Solicitar Cotización
               </Button>
 

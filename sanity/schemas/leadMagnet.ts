@@ -1,4 +1,6 @@
-export default {
+import { defineType, Rule } from 'sanity';
+
+export default defineType({
   name: 'leadMagnet',
   type: 'document',
   title: 'Lead Magnet',
@@ -7,7 +9,7 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Title',
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: 'slug',
@@ -17,7 +19,7 @@ export default {
         source: 'title',
         maxLength: 96,
       },
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: 'type',
@@ -31,13 +33,13 @@ export default {
           { title: 'Guide', value: 'guide' },
         ],
       },
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: 'description',
       type: 'text',
       title: 'Description',
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: 'content',
@@ -55,7 +57,12 @@ export default {
           fields: [
             { name: 'name', type: 'string', title: 'Field Name' },
             { name: 'label', type: 'string', title: 'Field Label' },
-            { name: 'type', type: 'string', title: 'Field Type', options: { list: ['text', 'email', 'number', 'select'] } },
+            {
+              name: 'type',
+              type: 'string',
+              title: 'Field Type',
+              options: { list: ['text', 'email', 'number', 'select'] },
+            },
             { name: 'required', type: 'boolean', title: 'Required', initialValue: false },
           ],
         },
@@ -78,4 +85,4 @@ export default {
       title: 'Thank You Message',
     },
   ],
-}
+});

@@ -1,10 +1,11 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { empresaData, contactoData } from '@/data/scraped-content';
-import { sendEmail } from '@/lib/emailjs';
+import { processNewsletterForm, FormResponse } from '@/lib/forms/handlers';
 import { analytics } from '@/lib/analytics';
 
 const footerLinks = {
@@ -31,20 +32,15 @@ const footerLinks = {
 };
 
 function NewsletterForm() {
-  const [state, setState] = useState<{ success: boolean; message: string } | null>(null);
+  const [state, setState] = useState<FormResponse | null>(null);
   const [isPending, setIsPending] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsPending(true);
-    
+
     const formData = new FormData(e.currentTarget);
-    const data = {
-      email: formData.get('email') as string,
-      page: 'Newsletter',
-    };
-    
-    const result = await sendEmail(data);
+    const result = await processNewsletterForm(formData);
     analytics.formSubmit('newsletter', result.success);
     setState(result);
     setIsPending(false);
@@ -60,6 +56,7 @@ function NewsletterForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
+      <input type="text" name="website_hp" className="hidden" tabIndex={-1} autoComplete="off" />
       <div className="flex gap-2">
         <input
           type="email"
@@ -72,6 +69,7 @@ function NewsletterForm() {
           Suscribirse
         </Button>
       </div>
+      {state?.success === false && <p className="text-red-400 text-xs">{state.message}</p>}
     </form>
   );
 }
@@ -93,23 +91,26 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <Link href="/" className="inline-flex items-center mb-4 text-text-primary hover:text-accent transition-colors">
-              <img
+            <Link
+              href="/"
+              className="inline-flex items-center mb-4 text-text-primary hover:text-accent transition-colors"
+            >
+              <Image
                 src="/images/logo-full.svg"
                 alt="Nexos Ingeniería"
                 className="h-14 w-auto"
                 width={200}
                 height={56}
-                loading="lazy"
-                decoding="async"
               />
             </Link>
-             <p className="text-text-secondary mb-6 max-w-sm">
-              {empresaData.descripcionCorta}
-            </p>
+            <p className="text-text-secondary mb-6 max-w-sm">{empresaData.descripcionCorta}</p>
             <div className="space-y-2 text-sm text-text-secondary mb-6">
-              <p className="font-[family-name:var(--font-geist-mono)]">📍 {contactoData.direccion}</p>
-              <p className="font-[family-name:var(--font-geist-mono)]">📞 {contactoData.telefono}</p>
+              <p className="font-[family-name:var(--font-geist-mono)]">
+                📍 {contactoData.direccion}
+              </p>
+              <p className="font-[family-name:var(--font-geist-mono)]">
+                📞 {contactoData.telefono}
+              </p>
             </div>
 
             <div className="space-y-2">
@@ -122,7 +123,7 @@ export function Footer() {
           <div>
             <h4 className="text-text-primary font-semibold mb-4">Soluciones</h4>
             <ul className="space-y-2">
-              {footerLinks.soluciones.map((link) => (
+              {footerLinks.soluciones.map(link => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -139,7 +140,7 @@ export function Footer() {
           <div>
             <h4 className="text-text-primary font-semibold mb-4">Industrias</h4>
             <ul className="space-y-2">
-              {footerLinks.industrias.map((link) => (
+              {footerLinks.industrias.map(link => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -156,7 +157,7 @@ export function Footer() {
           <div>
             <h4 className="text-text-primary font-semibold mb-4">Empresa</h4>
             <ul className="space-y-2">
-              {footerLinks.empresa.map((link) => (
+              {footerLinks.empresa.map(link => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -176,10 +177,16 @@ export function Footer() {
             © {new Date().getFullYear()} Nexos Ingeniería SAS. Todos los derechos reservados.
           </p>
           <div className="flex gap-6">
-            <Link href="/privacidad" className="text-text-muted hover:text-text-secondary text-sm transition-colors">
+            <Link
+              href="/privacidad"
+              className="text-text-muted hover:text-text-secondary text-sm transition-colors"
+            >
               Privacidad
             </Link>
-            <Link href="/terminos" className="text-text-muted hover:text-text-secondary text-sm transition-colors">
+            <Link
+              href="/terminos"
+              className="text-text-muted hover:text-text-secondary text-sm transition-colors"
+            >
               Términos
             </Link>
           </div>

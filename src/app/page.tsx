@@ -6,6 +6,7 @@ import CTASection from '@/components/sections/CTASection';
 import { ClientLogos } from '@/components/sections/ClientLogos';
 import { DifferentiatorsSection } from '@/components/sections/DifferentiatorsSection';
 import { ProjectsSection } from '@/components/sections/ProjectsSection';
+import { AlliedBrandsSection } from '@/components/sections/AlliedBrandsSection';
 import { empresaData } from '@/data/scraped-content';
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ function SectionSkeleton({ className }: { className?: string }) {
         <div className="h-8 bg-surface rounded w-1/3 mb-4"></div>
         <div className="h-4 bg-surface rounded w-2/3 mb-8"></div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[1, 2, 3].map((i) => (
+          {[1, 2, 3].map(i => (
             <div key={i} className="h-64 bg-surface rounded-xl"></div>
           ))}
         </div>
@@ -42,9 +43,7 @@ export default function HomePage() {
         <ClientLogos />
       </Suspense>
 
-      <Suspense
-        fallback={<SectionSkeleton className="py-20 md:py-32 bg-bg-secondary" />}
-      >
+      <Suspense fallback={<SectionSkeleton className="py-20 md:py-32 bg-bg-secondary" />}>
         <SolutionsSection />
       </Suspense>
 
@@ -54,6 +53,10 @@ export default function HomePage() {
 
       <Suspense fallback={<SectionSkeleton />}>
         <ProjectsSection />
+      </Suspense>
+
+      <Suspense fallback={<SectionSkeleton />}>
+        <AlliedBrandsSection />
       </Suspense>
 
       <CTASection />

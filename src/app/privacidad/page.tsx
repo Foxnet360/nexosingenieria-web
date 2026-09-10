@@ -25,15 +25,15 @@ export default function PrivacidadPage() {
           <div className="prose prose-invert max-w-none">
             <h2 className="text-2xl font-semibold text-text-primary mt-8 mb-4">1. Introducción</h2>
             <p className="text-text-secondary mb-4">
-              Nexos Ingeniería SAS (en adelante, "Nexos") se compromete a proteger la privacidad de los usuarios 
-              que visitan nuestro sitio web. Esta política de privacidad describe cómo recopilamos, usamos y 
-              protegemos su información personal.
+              Nexos Ingeniería SAS (en adelante, &quot;Nexos&quot;) se compromete a proteger la
+              privacidad de los usuarios que visitan nuestro sitio web. Esta política de privacidad
+              describe cómo recopilamos, usamos y protegemos su información personal.
             </p>
 
-            <h2 className="text-2xl font-semibold text-text-primary mt-8 mb-4">2. Información que Recopilamos</h2>
-            <p className="text-text-secondary mb-4">
-              Podemos recopilar la siguiente información:
-            </p>
+            <h2 className="text-2xl font-semibold text-text-primary mt-8 mb-4">
+              2. Información que Recopilamos
+            </h2>
+            <p className="text-text-secondary mb-4">Podemos recopilar la siguiente información:</p>
             <ul className="list-disc list-inside text-text-secondary mb-4 space-y-2">
               <li>Nombre y apellidos</li>
               <li>Correo electrónico</li>
@@ -42,10 +42,10 @@ export default function PrivacidadPage() {
               <li>Información sobre el proyecto o servicio de interés</li>
             </ul>
 
-            <h2 className="text-2xl font-semibold text-text-primary mt-8 mb-4">3. Uso de la Información</h2>
-            <p className="text-text-secondary mb-4">
-              Utilizamos su información personal para:
-            </p>
+            <h2 className="text-2xl font-semibold text-text-primary mt-8 mb-4">
+              3. Uso de la Información
+            </h2>
+            <p className="text-text-secondary mb-4">Utilizamos su información personal para:</p>
             <ul className="list-disc list-inside text-text-secondary mb-4 space-y-2">
               <li>Responder a sus consultas y solicitudes</li>
               <li>Enviar cotizaciones y propuestas comerciales</li>
@@ -53,16 +53,16 @@ export default function PrivacidadPage() {
               <li>Mejorar nuestros servicios y sitio web</li>
             </ul>
 
-            <h2 className="text-2xl font-semibold text-text-primary mt-8 mb-4">4. Protección de Datos</h2>
+            <h2 className="text-2xl font-semibold text-text-primary mt-8 mb-4">
+              4. Protección de Datos
+            </h2>
             <p className="text-text-secondary mb-4">
-              Implementamos medidas de seguridad técnicas y organizativas para proteger su información 
-              personal contra acceso no autorizado, pérdida o alteración.
+              Implementamos medidas de seguridad técnicas y organizativas para proteger su
+              información personal contra acceso no autorizado, pérdida o alteración.
             </p>
 
             <h2 className="text-2xl font-semibold text-text-primary mt-8 mb-4">5. Sus Derechos</h2>
-            <p className="text-text-secondary mb-4">
-              Usted tiene derecho a:
-            </p>
+            <p className="text-text-secondary mb-4">Usted tiene derecho a:</p>
             <ul className="list-disc list-inside text-text-secondary mb-4 space-y-2">
               <li>Acceder a sus datos personales</li>
               <li>Rectificar información incorrecta</li>
@@ -75,13 +75,20 @@ export default function PrivacidadPage() {
               Si tiene preguntas sobre esta política de privacidad, puede contactarnos en:
             </p>
             <p className="text-text-secondary">
-              Email: info@nexosingenieria.com<br />
-              Teléfono: +57 (6) 123-4567<br />
+              Email: info@nexosingenieria.com
+              <br />
+              Teléfono: +57 (6) 123-4567
+              <br />
               Dirección: Armenia, Quindío, Colombia
             </p>
 
             <p className="text-text-muted text-sm mt-8">
-              Última actualización: {new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' })}
+              Última actualización:{' '}
+              {new Date().toLocaleDateString('es-CO', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
             </p>
           </div>
         </AnimatedElement>

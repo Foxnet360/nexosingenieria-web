@@ -1,4 +1,6 @@
-export default {
+import { defineType, Rule } from 'sanity';
+
+export default defineType({
   name: 'formSubmission',
   title: 'Form Submissions',
   type: 'document',
@@ -7,13 +9,13 @@ export default {
       name: 'name',
       title: 'Name',
       type: 'string',
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: 'email',
       title: 'Email',
       type: 'string',
-      validation: (Rule: any) => Rule.required().email(),
+      validation: (rule: Rule) => rule.required().email(),
     },
     {
       name: 'company',
@@ -84,11 +86,12 @@ export default {
       subtitle: 'email',
       status: 'status',
     },
-    prepare({ title, subtitle, status }: { title: string; subtitle: string; status: string }) {
+    prepare(selection: Record<string, unknown>) {
+      const { title, subtitle, status } = selection;
       return {
-        title: `${title} (${status})`,
-        subtitle,
-      }
+        title: `${String(title ?? '')} (${String(status ?? '')})`,
+        subtitle: String(subtitle ?? ''),
+      };
     },
   },
-}
+});

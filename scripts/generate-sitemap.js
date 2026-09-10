@@ -37,12 +37,17 @@ const blogPosts = [
 
 // Dynamic routes (projects)
 const projects = [
+  { slug: 'subestacion-centenario-edeq', date: '2024-02-01' },
+  { slug: 'unad-edificio-celestino-mutis', date: '2024-01-25' },
+  { slug: 'centro-empresarial-icono', date: '2024-01-15' },
+  { slug: 'seniors-club-pance', date: '2023-11-20' },
+  { slug: 'bosque-residencial-la-pradera', date: '2023-10-10' },
   { slug: 'sede-financiera-nacional', date: '2024-01-20' },
   { slug: 'cadena-retail-25-tiendas', date: '2023-06-15' },
   { slug: 'hotel-boutique-armenia', date: '2023-09-10' },
-  { slug: 'clinica-salud-cali', date: '2023-11-05' },
-  { slug: 'universidad-campus-armenia', date: '2024-01-10' },
-  { slug: 'fabrica-industrial-pereira', date: '2023-08-20' },
+  { slug: 'clinica-quindio', date: '2023-11-05' },
+  { slug: 'universidad-eje-cafetero', date: '2024-01-10' },
+  { slug: 'planta-manufactura', date: '2023-08-20' },
 ];
 
 // Dynamic routes (industries)

@@ -11,11 +11,11 @@ interface WhatsAppButtonProps {
 }
 
 export function WhatsAppButton({
-  phoneNumber = '+573001234567',
-  message = 'Hola, me gustaría obtener más información sobre sus servicios.',
+  phoneNumber = '+573155089404',
+  message = 'Hola, me gustaría solicitar una consultoría técnica o información sobre sus servicios.',
   className,
 }: WhatsAppButtonProps) {
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  const whatsappUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
 
   return (
     <Link
@@ -23,7 +23,7 @@ export function WhatsAppButton({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        'fixed bottom-6 right-6 z-50',
+        'fixed bottom-20 md:bottom-6 right-6 z-50',
         'w-14 h-14 bg-green-500 rounded-full',
         'flex items-center justify-center',
         'shadow-lg shadow-green-500/30',

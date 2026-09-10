@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @layer theme {
   :root {
@@ -191,7 +191,9 @@
 
   /* Icon hover micro-animation */
   .icon-hover {
-    transition: transform 200ms ease-out, color 150ms ease-out;
+    transition:
+      transform 200ms ease-out,
+      color 150ms ease-out;
   }
 
   .icon-hover:hover {
@@ -209,24 +211,41 @@
 
 /* Registered custom properties for animations */
 @property --tw-translate-x {
-  syntax: "<length-percentage>";
+  syntax: '<length-percentage>';
   inherits: false;
   initial-value: 0px;
 }
 
 @property --tw-translate-y {
-  syntax: "<length-percentage>";
+  syntax: '<length-percentage>';
   inherits: false;
   initial-value: 0px;
 }
 
 @property --tw-opacity {
-  syntax: "<number>";
+  syntax: '<number>';
   inherits: false;
   initial-value: 1;
 }
 
 /* Animation keyframes */
+@keyframes scroll-x {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-x {
+  animation: scroll-x 30s linear infinite;
+}
+
+.animate-scroll-x:hover {
+  animation-play-state: paused;
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;

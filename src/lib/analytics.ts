@@ -1,11 +1,13 @@
-// Google Analytics 4 event tracking utility
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
 
-export function trackEvent(
-  eventName: string,
-  params?: Record<string, string | number | boolean>
-) {
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('event', eventName, params);
+// Google Analytics 4 event tracking utility
+export function trackEvent(eventName: string, params?: Record<string, string | number | boolean>) {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', eventName, params);
   }
 }
 

@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { List, X, Plugs, ShieldCheck, VideoCamera, CaretDown } from '@phosphor-icons/react';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/Button';
 
 const navLinks = [
   { label: 'Inicio', href: '/' },
@@ -50,24 +50,36 @@ export function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+  const [isMobileSolutionsOpen, setIsMobileSolutionsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsHidden(true);
         setIsMegaMenuOpen(false);
       } else {
         setIsHidden(false);
       }
-      
+
       setIsScrolled(currentScrollY > 20);
       setLastScrollY(currentScrollY);
     };
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsMegaMenuOpen(false);
+        setIsMobileMenuOpen(false);
+      }
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [lastScrollY]);
 
   return (
@@ -86,21 +98,23 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center text-text-primary hover:text-accent transition-colors">
-            <img
+          <Link
+            href="/"
+            className="flex items-center text-text-primary hover:text-accent transition-colors"
+          >
+            <Image
               src="/images/logo-full.svg"
               alt="Nexos Ingeniería"
               className="h-11 md:h-14 w-auto"
               width={200}
               height={56}
-              loading="eager"
-              decoding="async"
+              priority
             />
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8" aria-label="Navegación principal">
-            {navLinks.map((link) => (
+            {navLinks.map(link => (
               <div key={link.href} className="relative">
                 {link.hasMegaMenu ? (
                   <button
@@ -117,10 +131,9 @@ export function Header() {
                     <CaretDown
                       weight="regular"
                       size={16}
-                      className={cn(
-                        'transition-transform duration-200',
-                        { 'rotate-180': isMegaMenuOpen }
-                      )}
+                      className={cn('transition-transform duration-200', {
+                        'rotate-180': isMegaMenuOpen,
+                      })}
                     />
                   </button>
                 ) : (
@@ -152,11 +165,7 @@ export function Header() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? (
-              <X weight="bold" size={24} />
-            ) : (
-              <List weight="bold" size={24} />
-            )}
+            {isMobileMenuOpen ? <X weight="bold" size={24} /> : <List weight="bold" size={24} />}
           </button>
         </div>
 
@@ -177,7 +186,7 @@ export function Header() {
             <div className="grid grid-cols-3 gap-8">
               {/* Priority Services */}
               <div className="col-span-2 grid grid-cols-3 gap-6">
-                {megaMenuItems.prioritarios.map((item) => (
+                {megaMenuItems.prioritarios.map(item => (
                   <Link
                     key={item.href}
                     href={item.href}
@@ -200,7 +209,7 @@ export function Header() {
                   Más Servicios
                 </h4>
                 <ul className="space-y-3">
-                  {megaMenuItems.secundarios.map((item) => (
+                  {megaMenuItems.secundarios.map(item => (
                     <li key={item.href}>
                       <Link
                         href={item.href}
@@ -220,26 +229,80 @@ export function Header() {
 
         {/* Mobile Menu */}
         <div
-          className={cn(
-            'md:hidden overflow-hidden transition-all duration-300',
-            {
-              'max-h-96 opacity-100': isMobileMenuOpen,
-              'max-h-0 opacity-0': !isMobileMenuOpen,
-            }
-          )}
+          className={cn('md:hidden overflow-y-auto max-h-[80vh] transition-all duration-300', {
+            'max-h-[80vh] opacity-100 py-4': isMobileMenuOpen,
+            'max-h-0 opacity-0': !isMobileMenuOpen,
+          })}
         >
-          <nav className="py-4 space-y-4 border-t border-border">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                prefetch={true}
-                className="block text-text-secondary hover:text-text-primary transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <nav className="space-y-3 border-t border-border pt-4">
+            {navLinks.map(link => {
+              if (link.hasMegaMenu) {
+                return (
+                  <div key={link.href} className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <Link
+                        href={link.href}
+                        className="text-text-secondary hover:text-text-primary font-medium transition-colors"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {link.label}
+                      </Link>
+                      <button
+                        onClick={() => setIsMobileSolutionsOpen(!isMobileSolutionsOpen)}
+                        className="p-2 text-text-muted hover:text-accent"
+                        aria-label="Ver sub-servicios"
+                      >
+                        <CaretDown
+                          weight="bold"
+                          size={16}
+                          className={cn('transition-transform', {
+                            'rotate-180': isMobileSolutionsOpen,
+                          })}
+                        />
+                      </button>
+                    </div>
+
+                    {isMobileSolutionsOpen && (
+                      <div className="pl-4 space-y-2 border-l border-border/50 text-sm">
+                        {megaMenuItems.prioritarios.map(item => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            className="block text-accent hover:underline py-1"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            {item.title}
+                          </Link>
+                        ))}
+                        {megaMenuItems.secundarios.map(item => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            className="block text-text-secondary hover:text-text-primary py-1"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  prefetch={true}
+                  className="block text-text-secondary hover:text-text-primary font-medium transition-colors py-1"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+
             <Link
               href="/cotizar"
               onClick={() => setIsMobileMenuOpen(false)}

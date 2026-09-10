@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import Link from 'next/link';
-import { Section } from '@/components/ui/Section';
 import { Icon } from '@/components/ui/Icon';
 
 interface BlogLayoutProps {
@@ -38,17 +37,13 @@ export default function BlogLayout({ children }: BlogLayoutProps) {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         {/* Main Content */}
-        <div className="lg:col-span-2">
-          {children}
-        </div>
+        <div className="lg:col-span-2">{children}</div>
 
         {/* Sidebar */}
         <aside className="space-y-8">
           {/* Search */}
           <div className="bg-bg-card border border-border rounded-xl p-6">
-            <h3 className="text-lg font-semibold text-text-primary mb-4">
-              Buscar
-            </h3>
+            <h3 className="text-lg font-semibold text-text-primary mb-4">Buscar</h3>
             <div className="relative">
               <input
                 type="text"
@@ -63,16 +58,10 @@ export default function BlogLayout({ children }: BlogLayoutProps) {
 
           {/* Recent Posts */}
           <div className="bg-bg-card border border-border rounded-xl p-6">
-            <h3 className="text-lg font-semibold text-text-primary mb-4">
-              Artículos Recientes
-            </h3>
+            <h3 className="text-lg font-semibold text-text-primary mb-4">Artículos Recientes</h3>
             <div className="space-y-4">
-              {recentPosts.map((post) => (
-                <Link
-                  key={post.slug}
-                  href={`/blog/${post.slug}`}
-                  className="block group"
-                >
+              {recentPosts.map(post => (
+                <Link key={post.slug} href={`/blog/${post.slug}`} className="block group">
                   <p className="text-text-primary group-hover:text-accent transition-colors font-medium text-sm">
                     {post.title}
                   </p>
@@ -90,11 +79,9 @@ export default function BlogLayout({ children }: BlogLayoutProps) {
 
           {/* Categories */}
           <div className="bg-bg-card border border-border rounded-xl p-6">
-            <h3 className="text-lg font-semibold text-text-primary mb-4">
-              Categorías
-            </h3>
+            <h3 className="text-lg font-semibold text-text-primary mb-4">Categorías</h3>
             <div className="space-y-2">
-              {categories.map((category) => (
+              {categories.map(category => (
                 <Link
                   key={category.name}
                   href={`/blog?categoria=${encodeURIComponent(category.name)}`}
@@ -113,9 +100,7 @@ export default function BlogLayout({ children }: BlogLayoutProps) {
 
           {/* CTA */}
           <div className="bg-gradient-to-br from-accent/20 to-accent-warm/20 border border-accent/30 rounded-xl p-6">
-            <h3 className="text-lg font-semibold text-text-primary mb-2">
-              ¿Necesitas asesoría?
-            </h3>
+            <h3 className="text-lg font-semibold text-text-primary mb-2">¿Necesitas asesoría?</h3>
             <p className="text-text-secondary text-sm mb-4">
               Nuestros expertos están listos para ayudarte con tu proyecto.
             </p>

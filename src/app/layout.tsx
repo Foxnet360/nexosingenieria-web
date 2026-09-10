@@ -1,18 +1,10 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import Script from 'next/script';
 import './globals.css';
 import MainLayout from '@/components/layout/MainLayout';
 import { CombinedSchemas } from '@/components/schema/OrganizationSchema';
-
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
-  display: 'swap',
-  preload: true,
-});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nexosingenieria.com';
 
@@ -86,14 +78,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="es-CO"
-      className={`${inter.variable} ${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
-    >
+    <html lang="es-CO" className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-bg-primary text-text-primary">
         <CombinedSchemas />
         <GoogleAnalytics />
-        
+
         <MainLayout>{children}</MainLayout>
       </body>
     </html>

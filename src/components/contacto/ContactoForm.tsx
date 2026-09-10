@@ -6,28 +6,19 @@ import { Section } from '@/components/ui/Section';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
 import { Button } from '@/components/ui/Button';
 import { contactoData } from '@/data/scraped-content';
-import { sendEmail } from '@/lib/emailjs';
+import { processContactForm, FormResponse } from '@/lib/forms/handlers';
 import { analytics } from '@/lib/analytics';
 
 export default function ContactoClientPage() {
-  const [state, setState] = useState<{ success: boolean; message: string } | null>(null);
+  const [state, setState] = useState<FormResponse | null>(null);
   const [isPending, setIsPending] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsPending(true);
-    
+
     const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      company: formData.get('company') as string || '',
-      service: formData.get('service') as string || '',
-      message: formData.get('message') as string,
-      page: 'Contacto',
-    };
-    
-    const result = await sendEmail(data);
+    const result = await processContactForm(formData);
     analytics.formSubmit('contacto', result.success);
     setState(result);
     setIsPending(false);
@@ -50,12 +41,10 @@ export default function ContactoClientPage() {
               <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Check weight="bold" size={32} className="text-accent" />
               </div>
-              <h3 className="text-xl font-semibold text-text-primary mb-2">
-                ¡Mensaje Enviado!
-              </h3>
+              <h3 className="text-xl font-semibold text-text-primary mb-2">¡Mensaje Enviado!</h3>
               <p className="text-text-secondary">
-                Gracias por contactarnos. Nuestro equipo revisará tu mensaje
-                y te responderá en menos de 24 horas hábiles.
+                Gracias por contactarnos. Nuestro equipo revisará tu mensaje y te responderá en
+                menos de 24 horas hábiles.
               </p>
             </div>
           </AnimatedElement>
@@ -66,19 +55,41 @@ export default function ContactoClientPage() {
 
   return (
     <>
-      <Section background="secondary" padding="xl">
-        <div className="max-w-4xl mx-auto">
+      {/* Hero Banner */}
+      <section className="relative min-h-[40vh] flex items-center justify-center pt-24 pb-16 overflow-hidden bg-bg-secondary border-b border-border">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/images/hero-nosotros.webp"
+            alt="Contacto Nexos Ingeniería"
+            className="w-full h-full object-cover object-center opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/80 to-transparent" />
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <AnimatedElement animation="fade-in">
-            <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-4 font-[family-name:var(--font-geist-sans)]">
-                Contacto
-              </h1>
-              <p className="text-text-secondary">
-                Estamos listos para ayudarte. Completa el formulario y nos pondremos en contacto contigo.
-              </p>
-            </div>
+            <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-semibold uppercase tracking-wider mb-4 backdrop-blur-md">
+              Atención Personalizada
+            </span>
           </AnimatedElement>
 
+          <AnimatedElement animation="slide-up" delay={100}>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-4 font-[family-name:var(--font-geist-sans)]">
+              Contactá con Nosotros
+            </h1>
+          </AnimatedElement>
+
+          <AnimatedElement animation="slide-up" delay={200}>
+            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+              Estamos listos para asesorarte y convertir tus proyectos de ingeniería e
+              infraestructura inteligente en realidad.
+            </p>
+          </AnimatedElement>
+        </div>
+      </section>
+
+      <Section background="default" padding="xl">
+        <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Form */}
             <AnimatedElement animation="slide-up" delay={100}>
@@ -86,6 +97,20 @@ export default function ContactoClientPage() {
                 onSubmit={handleSubmit}
                 className="bg-bg-card border border-border rounded-xl p-8 space-y-6"
               >
+                {/* Honeypot field for bot protection */}
+                <input
+                  type="text"
+                  name="website_hp"
+                  className="hidden"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+
+                {state?.success === false && (
+                  <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm">
+                    {state.message}
+                  </div>
+                )}
                 <div>
                   <label
                     htmlFor="name"
@@ -175,12 +200,7 @@ export default function ContactoClientPage() {
                   ></textarea>
                 </div>
 
-                <Button
-                  type="submit"
-                  className="w-full"
-                  isLoading={isPending}
-                  disabled={isPending}
-                >
+                <Button type="submit" className="w-full" isLoading={isPending} disabled={isPending}>
                   Enviar Mensaje
                 </Button>
               </form>
@@ -198,10 +218,14 @@ export default function ContactoClientPage() {
                       <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
                         <MapPin weight="light" size={20} className="text-accent" />
                       </div>
-                       <div>
+                      <div>
                         <p className="text-text-primary font-medium">Dirección</p>
-                        <p className="text-text-secondary font-[family-name:var(--font-geist-mono)]">{contactoData.direccion}</p>
-                        <p className="text-text-secondary font-[family-name:var(--font-geist-mono)]">{contactoData.ciudad}, {contactoData.departamento}</p>
+                        <p className="text-text-secondary font-[family-name:var(--font-geist-mono)]">
+                          {contactoData.direccion}
+                        </p>
+                        <p className="text-text-secondary font-[family-name:var(--font-geist-mono)]">
+                          {contactoData.ciudad}, {contactoData.departamento}
+                        </p>
                       </div>
                     </div>
 
@@ -209,9 +233,11 @@ export default function ContactoClientPage() {
                       <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
                         <Phone weight="light" size={20} className="text-accent" />
                       </div>
-                       <div>
+                      <div>
                         <p className="text-text-primary font-medium">Teléfono</p>
-                        <p className="text-text-secondary font-[family-name:var(--font-geist-mono)]">{contactoData.telefono}</p>
+                        <p className="text-text-secondary font-[family-name:var(--font-geist-mono)]">
+                          {contactoData.telefono}
+                        </p>
                       </div>
                     </div>
 
@@ -222,7 +248,8 @@ export default function ContactoClientPage() {
                       <div>
                         <p className="text-text-primary font-medium">Email</p>
                         <p className="text-text-secondary">
-                          {contactoData.email || 'Por favor contáctenos por teléfono o redes sociales'}
+                          {contactoData.email ||
+                            'Por favor contáctenos por teléfono o redes sociales'}
                         </p>
                       </div>
                     </div>

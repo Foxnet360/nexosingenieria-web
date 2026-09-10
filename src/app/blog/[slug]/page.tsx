@@ -16,16 +16,22 @@ interface BlogPost {
   category: string;
   readTime: string;
   author: string;
+  heroImage: string;
 }
 
 export function generateStaticParams() {
-  return Object.keys(blogPosts).map((slug) => ({
+  return Object.keys(blogPosts).map(slug => ({
     slug,
   }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const post = blogPosts[params.slug];
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = blogPosts[slug];
   if (!post) {
     return {
       title: 'Artículo no encontrado | Nexos Ingeniería SAS',
@@ -78,7 +84,8 @@ const blogPosts: Record<string, BlogPost> = {
     date: '2024-01-15',
     category: 'Cableado Estructurado',
     readTime: '8 min',
-    author: 'Equipo Nexos',
+    author: 'Ing. Carlos Mendoza',
+    heroImage: '/images/soluciones/cableado-estructurado.webp',
   },
   '5-tendencias-seguridad-electronica-2026': {
     id: '2',
@@ -110,7 +117,8 @@ const blogPosts: Record<string, BlogPost> = {
     date: '2024-01-10',
     category: 'Seguridad',
     readTime: '6 min',
-    author: 'Equipo Nexos',
+    author: 'Ing. María Fernanda Ríos',
+    heroImage: '/images/soluciones/seguridad-electronica.webp',
   },
   'reducir-consumo-energetico-edificios': {
     id: '3',
@@ -138,7 +146,8 @@ const blogPosts: Record<string, BlogPost> = {
     date: '2024-01-05',
     category: 'Eficiencia Energética',
     readTime: '7 min',
-    author: 'Equipo Nexos',
+    author: 'Ing. Alejandro Gómez',
+    heroImage: '/images/hero-industrias.webp',
   },
   'diseno-salas-juntas-tecnologia-av': {
     id: '4',
@@ -162,7 +171,8 @@ const blogPosts: Record<string, BlogPost> = {
     date: '2023-12-28',
     category: 'Audio y Video',
     readTime: '5 min',
-    author: 'Equipo Nexos',
+    author: 'Ing. Juan Pablo Torres',
+    heroImage: '/images/soluciones/audio-video.webp',
   },
   'checklist-infraestructura-red-edificios-inteligentes': {
     id: '5',
@@ -209,18 +219,20 @@ const blogPosts: Record<string, BlogPost> = {
     date: '2023-12-20',
     category: 'Cableado Estructurado',
     readTime: '10 min',
-    author: 'Equipo Nexos',
+    author: 'Ing. Carlos Mendoza',
+    heroImage: '/images/soluciones/centros-de-datos.webp',
   },
 };
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-export default function BlogPostPage({ params }: PageProps) {
-  const post = blogPosts[params.slug];
+export default async function BlogPostPage({ params }: PageProps) {
+  const { slug } = await params;
+  const post = blogPosts[slug];
 
   if (!post) {
     notFound();
@@ -228,18 +240,29 @@ export default function BlogPostPage({ params }: PageProps) {
 
   return (
     <div>
-      <ArticleSchema 
-        title={post.title} 
+      <ArticleSchema
+        title={post.title}
         description={post.content.replace(/<[^>]*>/g, '').slice(0, 160)}
         slug={post.slug}
         date={post.date}
       />
-      <Section background="secondary" padding="xl">
-        <div className="max-w-3xl mx-auto">
+
+      {/* Hero Photographic Banner */}
+      <section className="relative min-h-[50vh] flex items-end pb-16 pt-28 overflow-hidden bg-bg-secondary border-b border-border">
+        <div className="absolute inset-0 z-0">
+          <img
+            src={post.heroImage}
+            alt={post.title}
+            className="w-full h-full object-cover object-center opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/80 to-transparent" />
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-4 w-full">
           <AnimatedElement animation="fade-in">
             <Link
               href="/blog"
-              className="text-accent text-sm font-medium mb-8 inline-flex items-center gap-2 hover:underline"
+              className="text-accent text-sm font-medium mb-6 inline-flex items-center gap-2 hover:underline bg-bg-primary/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-border"
             >
               <Icon name="arrow-left" size="sm" />
               Volver al Blog
@@ -247,29 +270,29 @@ export default function BlogPostPage({ params }: PageProps) {
           </AnimatedElement>
 
           <AnimatedElement animation="slide-up" delay={100}>
-            <div className="flex items-center gap-4 mb-6">
-              <span className="text-accent text-sm font-medium uppercase tracking-wider">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="px-3 py-1 rounded-full bg-accent/20 border border-accent/40 text-accent text-xs font-semibold uppercase tracking-wider backdrop-blur-md">
                 {post.category}
               </span>
-              <span className="text-text-muted">•</span>
-              <span className="text-text-muted text-sm">{post.readTime} de lectura</span>
+              <span className="text-text-muted text-xs">•</span>
+              <span className="text-text-muted text-xs font-mono">{post.readTime} de lectura</span>
             </div>
           </AnimatedElement>
 
           <AnimatedElement animation="slide-up" delay={200}>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-6 font-[family-name:var(--font-geist-sans)]">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-6 font-[family-name:var(--font-geist-sans)] leading-tight">
               {post.title}
             </h1>
           </AnimatedElement>
 
           <AnimatedElement animation="slide-up" delay={300}>
-            <div className="flex items-center gap-4 mb-8">
-              <div className="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center">
-                <span className="text-accent font-medium">{post.author.charAt(0)}</span>
+            <div className="flex items-center gap-4 pt-4 border-t border-border/50">
+              <div className="w-12 h-12 bg-accent/20 border border-accent/30 rounded-full flex items-center justify-center font-bold text-accent">
+                {post.author.charAt(0)}
               </div>
               <div>
                 <p className="text-text-primary font-medium">{post.author}</p>
-                <time className="text-text-muted text-sm">
+                <time className="text-text-muted text-xs font-mono">
                   {new Date(post.date).toLocaleDateString('es-CO', {
                     year: 'numeric',
                     month: 'long',
@@ -280,21 +303,37 @@ export default function BlogPostPage({ params }: PageProps) {
             </div>
           </AnimatedElement>
         </div>
-      </Section>
+      </section>
 
       <Section background="default" padding="xl">
         <div className="max-w-3xl mx-auto">
           <AnimatedElement animation="slide-up">
-            <article 
-              className="prose prose-invert prose-lg max-w-none mb-12"
+            <article
+              className="prose prose-invert prose-lg max-w-none mb-12 prose-headings:font-bold prose-headings:text-text-primary prose-p:text-text-secondary prose-p:leading-relaxed prose-li:text-text-secondary prose-strong:text-accent"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
           </AnimatedElement>
-          
+
+          {/* Author Card */}
+          <div className="bg-bg-card border border-border rounded-2xl p-6 mb-12 flex items-center gap-5">
+            <div className="w-14 h-14 bg-accent/15 border border-accent/30 rounded-full flex items-center justify-center text-xl font-bold text-accent shrink-0">
+              {post.author.charAt(0)}
+            </div>
+            <div>
+              <h4 className="text-text-primary font-semibold text-base mb-1">
+                Escrito por {post.author}
+              </h4>
+              <p className="text-text-secondary text-sm">
+                Especialista en infraestructura de telecomunicaciones y soluciones integrales para
+                edificación inteligente en Nexos Ingeniería SAS.
+              </p>
+            </div>
+          </div>
+
           <div className="border-t border-border pt-8">
-            <ShareButtons 
-              title={post.title} 
-              url={`https://nexosingenieria.com/blog/${post.slug}`} 
+            <ShareButtons
+              title={post.title}
+              url={`https://nexosingenieria.com/blog/${post.slug}`}
             />
           </div>
         </div>

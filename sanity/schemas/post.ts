@@ -1,4 +1,6 @@
-export default {
+import { defineType, Rule } from 'sanity';
+
+export default defineType({
   name: 'post',
   type: 'document',
   title: 'Blog Post',
@@ -7,7 +9,7 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Title',
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: 'slug',
@@ -17,23 +19,20 @@ export default {
         source: 'title',
         maxLength: 96,
       },
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: 'excerpt',
       type: 'text',
       title: 'Excerpt',
-      validation: (Rule: any) => Rule.max(200),
+      validation: (rule: Rule) => rule.max(200),
     },
     {
       name: 'content',
       type: 'array',
       title: 'Content',
-      of: [
-        { type: 'block' },
-        { type: 'image', options: { hotspot: true } },
-      ],
-      validation: (Rule: any) => Rule.required(),
+      of: [{ type: 'block' }, { type: 'image', options: { hotspot: true } }],
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: 'coverImage',
@@ -68,7 +67,7 @@ export default {
       name: 'publishedAt',
       type: 'datetime',
       title: 'Published At',
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: 'author',
@@ -79,13 +78,13 @@ export default {
       name: 'metaTitle',
       type: 'string',
       title: 'Meta Title',
-      validation: (Rule: any) => Rule.max(60),
+      validation: (rule: Rule) => rule.max(60),
     },
     {
       name: 'metaDescription',
       type: 'text',
       title: 'Meta Description',
-      validation: (Rule: any) => Rule.max(160),
+      validation: (rule: Rule) => rule.max(160),
     },
   ],
-}
+});

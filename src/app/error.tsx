@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import Link from 'next/link';
 import { Warning } from '@phosphor-icons/react';
 import { Button } from '@/components/ui/Button';
 
@@ -21,13 +22,10 @@ export default function Error({ error, unstable_retry }: ErrorProps) {
           <Warning weight="bold" size={32} className="text-red-500" />
         </div>
 
-        <h2 className="text-2xl font-bold text-text-primary">
-          Algo salió mal
-        </h2>
+        <h2 className="text-2xl font-bold text-text-primary">Algo salió mal</h2>
 
         <p className="text-text-secondary">
-          Lo sentimos, ha ocurrido un error inesperado. Puedes intentar
-          recargar la página.
+          Lo sentimos, ha ocurrido un error inesperado. Puedes intentar recargar la página.
         </p>
 
         {process.env.NODE_ENV === 'development' && (
@@ -44,7 +42,7 @@ export default function Error({ error, unstable_retry }: ErrorProps) {
           </Button>
 
           <Button asChild variant="ghost">
-            <a href="/">Volver al inicio</a>
+            <Link href="/">Volver al inicio</Link>
           </Button>
         </div>
       </div>

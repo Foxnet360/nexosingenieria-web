@@ -1,4 +1,6 @@
-export default {
+import { defineType, Rule } from 'sanity';
+
+export default defineType({
   name: 'caseStudy',
   type: 'document',
   title: 'Case Study',
@@ -7,7 +9,7 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Title',
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: 'slug',
@@ -17,13 +19,13 @@ export default {
         source: 'title',
         maxLength: 96,
       },
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: 'client',
       type: 'string',
       title: 'Client Name',
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: 'industry',
@@ -45,14 +47,14 @@ export default {
       type: 'text',
       title: 'Challenge',
       description: 'Describe the client problem',
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: 'solution',
       type: 'array',
       title: 'Solution',
       of: [{ type: 'block' }],
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: 'results',
@@ -88,7 +90,7 @@ export default {
       name: 'publishedAt',
       type: 'datetime',
       title: 'Published At',
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
   ],
-}
+});
