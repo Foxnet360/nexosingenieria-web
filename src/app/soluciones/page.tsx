@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Section } from '@/components/ui/Section';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
 import { Icon } from '@/components/ui/Icon';
@@ -156,11 +157,12 @@ export default function SolucionesPage() {
       {/* Hero Banner */}
       <section className="relative min-h-[52vh] flex items-end py-16 md:py-24 bg-bg-primary overflow-hidden border-b border-border">
         <div className="absolute inset-0 z-0">
-          <img
+          <Image
             src="/images/hero-soluciones.webp"
             alt="Soluciones de Ingeniería Nexos"
-            className="w-full h-full object-cover object-center filter brightness-[0.38] contrast-110 scale-105"
-            loading="eager"
+            fill
+            className="object-cover object-center filter brightness-[0.38] contrast-110 scale-105"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/80 to-bg-primary/30" />
         </div>
@@ -242,10 +244,12 @@ export default function SolucionesPage() {
                 <article className="bg-bg-card border border-border/80 rounded-2xl overflow-hidden hover:border-accent/40 transition-all duration-300 group hover:shadow-xl hover:shadow-accent/5 flex flex-col h-full">
                   {/* Image Banner Header */}
                   <div className="relative h-56 overflow-hidden bg-bg-secondary">
-                    <img
+                    <Image
                       src={service.image}
                       alt={service.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-bg-card via-bg-card/40 to-transparent" />
                     <span className="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-bg-primary/80 backdrop-blur-md border border-white/10 text-accent text-xs font-semibold uppercase tracking-wider">

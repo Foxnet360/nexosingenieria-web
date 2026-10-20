@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Section } from '@/components/ui/Section';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
 import { AlliedBrandsSection } from '@/components/sections/AlliedBrandsSection';
@@ -14,11 +15,12 @@ export default function NosotrosPage() {
     <>
       <section className="relative min-h-[50vh] flex items-end py-16 md:py-24 bg-bg-primary overflow-hidden border-b border-border">
         <div className="absolute inset-0 z-0">
-          <img
+          <Image
             src="/images/hero-nosotros.webp"
             alt="Sobre Nexos Ingeniería"
-            className="w-full h-full object-cover object-center filter brightness-[0.38] contrast-110 scale-105"
-            loading="eager"
+            fill
+            className="object-cover object-center filter brightness-[0.38] contrast-110 scale-105"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/80 to-bg-primary/30"></div>
         </div>

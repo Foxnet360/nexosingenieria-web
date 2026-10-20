@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Section } from '@/components/ui/Section';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
 
@@ -120,10 +121,12 @@ export default function BlogPage() {
       {/* Hero Banner */}
       <section className="relative min-h-[45vh] flex items-center justify-center pt-24 pb-16 overflow-hidden bg-bg-secondary border-b border-border">
         <div className="absolute inset-0 z-0">
-          <img
+          <Image
             src="/images/hero-soluciones.webp"
             alt="Blog Nexos Ingeniería"
-            className="w-full h-full object-cover object-center opacity-35"
+            fill
+            className="object-cover object-center opacity-35"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/80 to-transparent" />
         </div>
@@ -176,10 +179,12 @@ export default function BlogPage() {
                   <Link href={`/blog/${post.slug}`} className="flex flex-col h-full">
                     {/* Thumbnail image with overlay hover zoom */}
                     <div className="relative aspect-[16/10] overflow-hidden bg-bg-secondary">
-                      <img
+                      <Image
                         src={post.image}
                         alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-bg-card/90 via-transparent to-transparent opacity-60" />
                       <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-bg-primary/80 backdrop-blur-md border border-white/10 text-accent text-xs font-semibold uppercase tracking-wider">

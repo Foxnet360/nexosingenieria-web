@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowDown } from '@phosphor-icons/react';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
 import { Button } from '@/components/ui/Button';
@@ -12,16 +13,13 @@ export default function HeroSection() {
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src="/images/hero-bg.webp"
           alt="Tecnología e innovación"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          width={1920}
-          height={1080}
-          srcSet="/images/hero-bg-640.webp 640w, /images/hero-bg-750.webp 750w, /images/hero-bg-828.webp 828w, /images/hero-bg-1080.webp 1080w, /images/hero-bg-1200.webp 1200w, /images/hero-bg.webp 1920w"
+          fill
+          className="object-cover object-center"
           sizes="100vw"
-          loading="eager"
-          decoding="async"
+          priority
         />
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-bg-primary/80" />

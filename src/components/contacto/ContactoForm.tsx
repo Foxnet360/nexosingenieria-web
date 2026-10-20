@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Check, MapPin, Phone, EnvelopeSimple } from '@phosphor-icons/react';
 import { Section } from '@/components/ui/Section';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
@@ -58,10 +59,12 @@ export default function ContactoClientPage() {
       {/* Hero Banner */}
       <section className="relative min-h-[40vh] flex items-center justify-center pt-24 pb-16 overflow-hidden bg-bg-secondary border-b border-border">
         <div className="absolute inset-0 z-0">
-          <img
+          <Image
             src="/images/hero-nosotros.webp"
             alt="Contacto Nexos Ingeniería"
-            className="w-full h-full object-cover object-center opacity-30"
+            fill
+            className="object-cover object-center opacity-30"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/80 to-transparent" />
         </div>

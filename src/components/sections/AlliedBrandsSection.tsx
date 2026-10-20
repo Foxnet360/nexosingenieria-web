@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { alliedBrands } from '@/data/alliedBrands';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
 
@@ -88,11 +89,12 @@ export function AlliedBrandsSection({
                 className="group relative bg-white/95 dark:bg-bg-card/90 border border-border rounded-xl p-3.5 h-24 flex flex-col items-center justify-center text-center hover:border-accent/50 hover:shadow-md transition-all duration-300"
                 title={`${brand.name} - ${brand.category}: ${brand.description}`}
               >
-                <img
+                <Image
                   src={brand.logo}
                   alt={brand.name}
+                  width={110}
+                  height={32}
                   className="max-h-8 max-w-[110px] w-auto object-contain filter grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 transition-all duration-300 mb-1.5"
-                  loading="lazy"
                 />
                 <span className="text-[11px] font-semibold text-text-primary group-hover:text-accent transition-colors truncate max-w-full">
                   {brand.name}

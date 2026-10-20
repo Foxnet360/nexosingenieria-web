@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const clientLogos = [
   { name: 'EDEQ S.A. E.S.P.', logo: '/images/logos_clientes/logo_EDEQ.png' },
   { name: 'UNAD Colombia', logo: '/images/logos_clientes/Logo_UNAD.svg' },
@@ -32,11 +34,12 @@ export function ClientLogos() {
             {clientLogos.map((client, index) => (
               <div key={`first-${index}`} className="flex-shrink-0 mx-6 md:mx-8">
                 <div className="h-16 px-6 bg-white/90 dark:bg-bg-card/90 backdrop-blur-md border border-border rounded-xl flex items-center justify-center hover:border-accent/50 hover:bg-white hover:shadow-md transition-all duration-300 group">
-                  <img
+                  <Image
                     src={client.logo}
                     alt={client.name}
+                    width={140}
+                    height={36}
                     className="max-h-9 max-w-[140px] w-auto object-contain filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
-                    loading="lazy"
                   />
                 </div>
               </div>
@@ -46,11 +49,12 @@ export function ClientLogos() {
             {clientLogos.map((client, index) => (
               <div key={`second-${index}`} className="flex-shrink-0 mx-6 md:mx-8">
                 <div className="h-16 px-6 bg-white/90 dark:bg-bg-card/90 backdrop-blur-md border border-border rounded-xl flex items-center justify-center hover:border-accent/50 hover:bg-white hover:shadow-md transition-all duration-300 group">
-                  <img
+                  <Image
                     src={client.logo}
                     alt={client.name}
+                    width={140}
+                    height={36}
                     className="max-h-9 max-w-[140px] w-auto object-contain filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
-                    loading="lazy"
                   />
                 </div>
               </div>

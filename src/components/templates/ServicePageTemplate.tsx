@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   ArrowLeft,
   CheckCircle,
@@ -118,11 +119,12 @@ export function ServicePageTemplate({
       {/* 1. High-Impact Photographic Hero Section */}
       <section className="relative min-h-[58vh] flex items-end py-16 md:py-24 bg-bg-primary overflow-hidden border-b border-border">
         <div className="absolute inset-0 z-0">
-          <img
+          <Image
             src={heroImage}
             alt={title}
-            className="w-full h-full object-cover object-center filter brightness-[0.38] contrast-110 scale-105"
-            loading="eager"
+            fill
+            className="object-cover object-center filter brightness-[0.38] contrast-110 scale-105"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/80 to-bg-primary/30" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,212,255,0.12),transparent_70%)]" />

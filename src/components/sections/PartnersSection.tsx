@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { alliedBrands } from '@/data/alliedBrands';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
 
@@ -54,11 +55,12 @@ export function PartnersSection({ serviceFilter }: PartnersSectionProps) {
           {displayedList.map((partner, index) => (
             <AnimatedElement key={partner.id} animation="slide-up" delay={index * 40}>
               <div className="group bg-white/95 dark:bg-bg-card/90 border border-border rounded-xl p-3.5 h-24 flex flex-col items-center justify-center text-center hover:border-accent/50 hover:shadow-md transition-all duration-300">
-                <img
+                <Image
                   src={partner.logo}
                   alt={partner.name}
+                  width={110}
+                  height={32}
                   className="max-h-8 max-w-[110px] w-auto object-contain filter grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 transition-all duration-300 mb-1"
-                  loading="lazy"
                 />
                 <p className="text-text-primary font-semibold text-[11px] truncate max-w-full group-hover:text-accent transition-colors">
                   {partner.name}

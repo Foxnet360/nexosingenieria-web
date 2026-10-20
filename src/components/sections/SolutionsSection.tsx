@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Plugs, Shield, House, ArrowRight } from '@phosphor-icons/react';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
 import { serviciosData } from '@/data/scraped-content';
@@ -51,12 +52,12 @@ export default function SolutionsSection() {
                   className="group block bg-bg-card border border-border rounded-xl overflow-hidden hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5"
                 >
                   <div className="h-44 relative overflow-hidden bg-bg-primary">
-                    <img
+                    <Image
                       src={pillar.image}
                       alt={pillar.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                      decoding="async"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-bg-card via-bg-card/60 to-transparent"></div>
                     <div className="absolute bottom-4 left-6 w-12 h-12 bg-accent/20 backdrop-blur-md border border-accent/30 rounded-xl flex items-center justify-center icon-glow-medium">

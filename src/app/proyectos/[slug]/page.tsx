@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Section } from '@/components/ui/Section';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
 import { Icon } from '@/components/ui/Icon';
@@ -396,12 +397,12 @@ export default async function ProyectoPage({ params }: { params: Promise<{ slug:
       <section className="relative min-h-[60vh] flex items-end py-16 md:py-24 bg-bg-primary overflow-hidden border-b border-border">
         {/* Background Location Image */}
         <div className="absolute inset-0 z-0">
-          <img
+          <Image
             src={project.image}
             alt={project.title}
-            className="w-full h-full object-cover object-center filter brightness-[0.45] contrast-110 scale-105 transition-transform duration-1000"
-            loading="eager"
-            decoding="async"
+            fill
+            className="object-cover object-center filter brightness-[0.45] contrast-110 scale-105 transition-transform duration-1000"
+            priority
           />
           {/* Gradient Overlay for visual depth */}
           <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/80 to-bg-primary/30"></div>
@@ -444,9 +445,11 @@ export default async function ProyectoPage({ params }: { params: Promise<{ slug:
                 </p>
                 {project.clientLogo && (
                   <div className="px-4 py-2 rounded-xl bg-white/90 dark:bg-bg-card/90 backdrop-blur-md border border-border inline-flex items-center shadow-md">
-                    <img
+                    <Image
                       src={project.clientLogo}
                       alt={project.client}
+                      width={120}
+                      height={28}
                       className="max-h-7 max-w-[120px] w-auto object-contain"
                     />
                   </div>

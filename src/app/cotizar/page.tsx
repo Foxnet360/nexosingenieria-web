@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Check } from '@phosphor-icons/react';
 import { Section } from '@/components/ui/Section';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
@@ -60,10 +61,12 @@ export default function CotizarPage() {
       {/* Hero Banner */}
       <section className="relative min-h-[42vh] flex items-center justify-center pt-24 pb-16 overflow-hidden bg-bg-secondary border-b border-border">
         <div className="absolute inset-0 z-0">
-          <img
+          <Image
             src="/images/hero-soluciones.webp"
             alt="Solicitar Cotización Nexos Ingeniería"
-            className="w-full h-full object-cover object-center opacity-30"
+            fill
+            className="object-cover object-center opacity-30"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/80 to-transparent" />
         </div>

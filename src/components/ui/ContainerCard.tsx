@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { MapPin } from '@phosphor-icons/react';
 import { cn } from '@/lib/utils';
 
@@ -34,14 +35,13 @@ export function ContainerCard({
         className="relative h-48 @sm:h-56 @md:h-64 @lg:h-72 bg-bg-secondary overflow-hidden"
         style={{ aspectRatio: '16/9' }}
       >
-        <img
+        <Image
           src={image}
           alt={alt}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:duration-0"
-          width={640}
-          height={360}
-          loading={priority ? 'eager' : 'lazy'}
-          decoding="async"
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:duration-0"
+          priority={priority}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-bg-card via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity"></div>
       </div>
