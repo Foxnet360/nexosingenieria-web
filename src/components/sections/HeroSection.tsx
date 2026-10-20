@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { ArrowDown } from '@phosphor-icons/react';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
 import { Button } from '@/components/ui/Button';
@@ -50,33 +51,32 @@ export default function HeroSection() {
 
           <AnimatedElement animation="slide-up" delay={100}>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-text-primary mb-6 leading-tight font-[family-name:var(--font-geist-sans)]">
-              Transformamos espacios con{' '}
-              <span className="text-accent">tecnología integrada</span>
+              Transformamos espacios con <span className="text-accent">tecnología integrada</span>
             </h1>
           </AnimatedElement>
 
           <AnimatedElement animation="slide-up" delay={200}>
             <p className="text-lg md:text-xl text-text-secondary mb-8 max-w-2xl mx-auto">
-              {empresaData.descripcionCorta}. Diseñamos e implementamos soluciones
-              de cableado estructurado, seguridad electrónica, eficiencia energética
-              y automatización para edificios inteligentes.
+              {empresaData.descripcionCorta}. Diseñamos e implementamos soluciones de cableado
+              estructurado, seguridad electrónica, eficiencia energética y automatización para
+              edificios inteligentes.
             </p>
           </AnimatedElement>
 
           <AnimatedElement animation="slide-up" delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                onClick={() => analytics.ctaClick('solicitar_cotizacion', 'hero')}
-              >
-                Solicitar Cotización
+              <Button asChild size="lg">
+                <Link
+                  href="/cotizar"
+                  onClick={() => analytics.ctaClick('solicitar_cotizacion', 'hero')}
+                >
+                  Solicitar Cotización
+                </Link>
               </Button>
-              <Button 
-                variant="secondary" 
-                size="lg"
-                onClick={() => analytics.ctaClick('ver_proyectos', 'hero')}
-              >
-                Ver Proyectos
+              <Button asChild variant="secondary" size="lg">
+                <Link href="/proyectos" onClick={() => analytics.ctaClick('ver_proyectos', 'hero')}>
+                  Ver Proyectos
+                </Link>
               </Button>
             </div>
           </AnimatedElement>

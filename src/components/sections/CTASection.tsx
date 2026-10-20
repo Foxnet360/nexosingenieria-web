@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 
 export default function CTASection() {
@@ -11,13 +12,15 @@ export default function CTASection() {
             ¿Listo para transformar su edificio?
           </h2>
           <p className="text-text-secondary mb-8 max-w-2xl mx-auto">
-            Agenda una consultoría gratuita y descubra cómo podemos ayudarle a
-            crear un espacio más inteligente, seguro y eficiente.
+            Agenda una consultoría gratuita y descubra cómo podemos ayudarle a crear un espacio más
+            inteligente, seguro y eficiente.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg">Agendar Consultoría Gratis</Button>
-            <Button variant="secondary" size="lg">
-              Ver Más Servicios
+            <Button asChild size="lg">
+              <Link href="/contacto">Agendar Consultoría Gratis</Link>
+            </Button>
+            <Button asChild variant="secondary" size="lg">
+              <Link href="/soluciones">Ver Más Servicios</Link>
             </Button>
           </div>
         </div>
@@ -35,13 +38,15 @@ export function ServiceCTASection({ serviceName }: { serviceName: string }) {
             ¿Necesita {serviceName}?
           </h2>
           <p className="text-text-secondary mb-8 max-w-2xl mx-auto">
-            Agenda una consultoría gratuita y descubra cómo podemos ayudarle a
-            implementar la mejor solución para su proyecto.
+            Agenda una consultoría gratuita y descubra cómo podemos ayudarle a implementar la mejor
+            solución para su proyecto.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg">Solicitar Cotización</Button>
-            <Button variant="secondary" size="lg">
-              Ver Más Servicios
+            <Button asChild size="lg">
+              <Link href="/cotizar">Solicitar Cotización</Link>
+            </Button>
+            <Button asChild variant="secondary" size="lg">
+              <Link href="/soluciones">Ver Más Servicios</Link>
             </Button>
           </div>
         </div>

@@ -84,6 +84,7 @@ export function Header() {
 
   return (
     <header
+      onMouseLeave={() => setIsMegaMenuOpen(false)}
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         'border-b border-transparent',
@@ -100,6 +101,7 @@ export function Header() {
           {/* Logo */}
           <Link
             href="/"
+            onClick={() => setIsMegaMenuOpen(false)}
             className="flex items-center text-text-primary hover:text-accent transition-colors"
           >
             <Image
@@ -140,6 +142,8 @@ export function Header() {
                   <Link
                     href={link.href}
                     prefetch={true}
+                    onMouseEnter={() => setIsMegaMenuOpen(false)}
+                    onClick={() => setIsMegaMenuOpen(false)}
                     className="text-sm font-medium transition-colors duration-200 text-text-secondary hover:text-text-primary"
                   >
                     {link.label}
@@ -153,6 +157,7 @@ export function Header() {
           <div className="hidden md:block">
             <Link
               href="/cotizar"
+              onClick={() => setIsMegaMenuOpen(false)}
               className="inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 bg-accent text-bg-primary hover:bg-accent/90 active:bg-accent/80 h-9 px-4 text-sm"
             >
               Cotizar
@@ -175,8 +180,8 @@ export function Header() {
             'hidden md:block absolute left-0 right-0 top-full bg-bg-primary/95 backdrop-blur-md border-b border-border/50',
             'transition-all duration-200 overflow-hidden',
             {
-              'max-h-96 opacity-100': isMegaMenuOpen,
-              'max-h-0 opacity-0': !isMegaMenuOpen,
+              'max-h-[32rem] opacity-100 pointer-events-auto': isMegaMenuOpen,
+              'max-h-0 opacity-0 pointer-events-none': !isMegaMenuOpen,
             }
           )}
           onMouseEnter={() => setIsMegaMenuOpen(true)}
@@ -204,24 +209,37 @@ export function Header() {
               </div>
 
               {/* Secondary Services */}
-              <div className="border-l border-border pl-8">
-                <h4 className="text-text-muted text-xs font-semibold uppercase tracking-wider mb-4">
-                  Más Servicios
-                </h4>
-                <ul className="space-y-3">
-                  {megaMenuItems.secundarios.map(item => (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        prefetch={true}
-                        className="text-text-secondary hover:text-text-primary transition-colors text-sm"
-                        onClick={() => setIsMegaMenuOpen(false)}
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+              <div className="border-l border-border pl-8 flex flex-col justify-between">
+                <div>
+                  <h4 className="text-text-muted text-xs font-semibold uppercase tracking-wider mb-4">
+                    Más Servicios
+                  </h4>
+                  <ul className="space-y-3">
+                    {megaMenuItems.secundarios.map(item => (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          prefetch={true}
+                          className="text-text-secondary hover:text-text-primary transition-colors text-sm"
+                          onClick={() => setIsMegaMenuOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="pt-4 border-t border-border/50">
+                  <Link
+                    href="/soluciones"
+                    prefetch={true}
+                    className="text-xs font-semibold text-accent hover:underline inline-flex items-center gap-1"
+                    onClick={() => setIsMegaMenuOpen(false)}
+                  >
+                    Ver todas las soluciones &rarr;
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -229,9 +247,9 @@ export function Header() {
 
         {/* Mobile Menu */}
         <div
-          className={cn('md:hidden overflow-y-auto max-h-[80vh] transition-all duration-300', {
-            'max-h-[80vh] opacity-100 py-4': isMobileMenuOpen,
-            'max-h-0 opacity-0': !isMobileMenuOpen,
+          className={cn('md:hidden overflow-y-auto transition-all duration-300', {
+            'max-h-[80vh] opacity-100 py-4 pointer-events-auto': isMobileMenuOpen,
+            'max-h-0 opacity-0 pointer-events-none invisible': !isMobileMenuOpen,
           })}
         >
           <nav className="space-y-3 border-t border-border pt-4">

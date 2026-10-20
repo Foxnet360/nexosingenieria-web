@@ -43,7 +43,7 @@ export default function ContactoClientPage() {
               </div>
               <h3 className="text-xl font-semibold text-text-primary mb-2">¡Mensaje Enviado!</h3>
               <p className="text-text-secondary">
-                Gracias por contactarnos. Nuestro equipo revisará tu mensaje y te responderá en
+                Gracias por contactarnos. Nuestro equipo revisará su mensaje y le responderá en
                 menos de 24 horas hábiles.
               </p>
             </div>
@@ -75,13 +75,13 @@ export default function ContactoClientPage() {
 
           <AnimatedElement animation="slide-up" delay={100}>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-4 font-[family-name:var(--font-geist-sans)]">
-              Contactá con Nosotros
+              Contáctenos
             </h1>
           </AnimatedElement>
 
           <AnimatedElement animation="slide-up" delay={200}>
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-              Estamos listos para asesorarte y convertir tus proyectos de ingeniería e
+              Estamos listos para asesorarle y convertir sus proyectos de ingeniería e
               infraestructura inteligente en realidad.
             </p>
           </AnimatedElement>

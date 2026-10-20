@@ -33,9 +33,9 @@ export function StickyCTABar() {
           <p className="text-text-primary text-sm font-medium">¿Necesitas una solución?</p>
           <p className="text-text-muted text-xs">Consultoría gratuita</p>
         </div>
-        
+
         <Link
-          href="/contacto"
+          href="/cotizar"
           className="flex-shrink-0 px-4 py-2 bg-accent text-bg-primary rounded-lg text-sm font-medium hover:bg-accent/90 transition-colors"
         >
           Cotizar

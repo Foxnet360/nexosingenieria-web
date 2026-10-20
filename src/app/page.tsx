@@ -2,10 +2,12 @@ import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import HeroSection from '@/components/sections/HeroSection';
 import SolutionsSection from '@/components/sections/SolutionsSection';
+import { IndustriesSection } from '@/components/sections/IndustriesSection';
 import CTASection from '@/components/sections/CTASection';
 import { ClientLogos } from '@/components/sections/ClientLogos';
 import { DifferentiatorsSection } from '@/components/sections/DifferentiatorsSection';
 import { ProjectsSection } from '@/components/sections/ProjectsSection';
+import { BlogPreviewSection } from '@/components/sections/BlogPreviewSection';
 import { AlliedBrandsSection } from '@/components/sections/AlliedBrandsSection';
 import { empresaData } from '@/data/scraped-content';
 
@@ -48,11 +50,19 @@ export default function HomePage() {
       </Suspense>
 
       <Suspense fallback={<SectionSkeleton />}>
+        <IndustriesSection />
+      </Suspense>
+
+      <Suspense fallback={<SectionSkeleton />}>
         <DifferentiatorsSection />
       </Suspense>
 
       <Suspense fallback={<SectionSkeleton />}>
         <ProjectsSection />
+      </Suspense>
+
+      <Suspense fallback={<SectionSkeleton className="py-20 md:py-32 bg-bg-secondary" />}>
+        <BlogPreviewSection />
       </Suspense>
 
       <Suspense fallback={<SectionSkeleton />}>

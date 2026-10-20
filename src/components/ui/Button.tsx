@@ -9,12 +9,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary:
-          'bg-accent text-bg-primary hover:bg-accent/90 active:bg-accent/80',
+        primary: 'bg-accent text-bg-primary hover:bg-accent/90 active:bg-accent/80',
         secondary:
           'bg-bg-card border border-border text-text-primary hover:bg-bg-secondary hover:border-accent/50',
-        ghost:
-          'text-text-secondary hover:text-text-primary hover:bg-bg-secondary',
+        ghost: 'text-text-secondary hover:text-text-primary hover:bg-bg-secondary',
         icon: 'p-2 text-text-secondary hover:text-accent hover:bg-bg-secondary rounded-full',
       },
       size: {
@@ -39,8 +37,7 @@ const buttonVariants = cva(
 );
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   isLoading?: boolean;
   asChild?: boolean;
 }
@@ -59,10 +56,25 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const Comp = asChild ? Slot : 'button';
+    if (asChild) {
+      return (
+        <Slot
+          ref={ref}
+          className={cn(
+            buttonVariants({ variant, size }),
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2',
+            'disabled:opacity-50 disabled:pointer-events-none',
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </Slot>
+      );
+    }
 
     return (
-      <Comp
+      <button
         ref={ref}
         className={cn(
           buttonVariants({ variant, size }),
@@ -75,15 +87,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {isLoading && (
-          <Spinner
-            weight="bold"
-            size={16}
-            className="animate-spin shrink-0"
-            aria-hidden="true"
-          />
+          <Spinner weight="bold" size={16} className="animate-spin shrink-0" aria-hidden="true" />
         )}
         <span className={cn(isLoading && 'opacity-70')}>{children}</span>
-      </Comp>
+      </button>
     );
   }
 );
