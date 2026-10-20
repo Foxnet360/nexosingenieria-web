@@ -15,7 +15,7 @@
     "buildCommand": "npm run build"
   },
   "deploy": {
-    "startCommand": "serve out -p $PORT",
+    "startCommand": "npm run start",
     "healthcheckPath": "/",
     "healthcheckTimeout": 100,
     "restartPolicyType": "ON_FAILURE",

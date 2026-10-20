@@ -109,6 +109,12 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://nexosingenieria.com/politica-datos</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://nexosingenieria.com/blog/guia-cableado-estructurado-empresas-colombianas</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>

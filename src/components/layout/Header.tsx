@@ -143,7 +143,9 @@ export function Header() {
                     href={link.href}
                     prefetch={true}
                     onMouseEnter={() => setIsMegaMenuOpen(false)}
-                    onClick={() => setIsMegaMenuOpen(false)}
+                    onClick={() => {
+                      if (isMegaMenuOpen) setIsMegaMenuOpen(false);
+                    }}
                     className="text-sm font-medium transition-colors duration-200 text-text-secondary hover:text-text-primary"
                   >
                     {link.label}
@@ -197,7 +199,9 @@ export function Header() {
                     href={item.href}
                     prefetch={true}
                     className="group p-4 rounded-xl bg-accent/5 hover:bg-accent/10 transition-colors"
-                    onClick={() => setIsMegaMenuOpen(false)}
+                    onClick={() => {
+                      if (isMegaMenuOpen) setIsMegaMenuOpen(false);
+                    }}
                   >
                     <div className="text-accent mb-3 icon-glow-subtle">{item.icon}</div>
                     <h3 className="text-text-primary font-semibold mb-1 group-hover:text-accent transition-colors">
@@ -221,7 +225,9 @@ export function Header() {
                           href={item.href}
                           prefetch={true}
                           className="text-text-secondary hover:text-text-primary transition-colors text-sm"
-                          onClick={() => setIsMegaMenuOpen(false)}
+                          onClick={() => {
+                            if (isMegaMenuOpen) setIsMegaMenuOpen(false);
+                          }}
                         >
                           {item.label}
                         </Link>
@@ -235,7 +241,9 @@ export function Header() {
                     href="/soluciones"
                     prefetch={true}
                     className="text-xs font-semibold text-accent hover:underline inline-flex items-center gap-1"
-                    onClick={() => setIsMegaMenuOpen(false)}
+                    onClick={() => {
+                      if (isMegaMenuOpen) setIsMegaMenuOpen(false);
+                    }}
                   >
                     Ver todas las soluciones &rarr;
                   </Link>
