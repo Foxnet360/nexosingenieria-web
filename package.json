@@ -12,7 +12,10 @@
     "lint:fix": "eslint --fix",
     "format": "prettier --write .",
     "type-check": "tsc --noEmit",
-    "prepare": "husky"
+    "prepare": "husky || true"
+  },
+  "engines": {
+    "node": ">=20.9.0"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
