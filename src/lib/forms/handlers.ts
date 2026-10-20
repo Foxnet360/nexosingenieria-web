@@ -1,9 +1,16 @@
 import { sendEmail } from '@/lib/emailjs';
 
+const WHATSAPP_PHONE = '573155089404';
+
 export interface FormResponse {
   success: boolean;
   message: string;
   errors?: Record<string, string>;
+  whatsappUrl?: string;
+}
+
+export function buildWhatsAppLink(text: string): string {
+  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`;
 }
 
 export async function processContactForm(formData: FormData): Promise<FormResponse> {
@@ -45,6 +52,9 @@ export async function processContactForm(formData: FormData): Promise<FormRespon
     };
   }
 
+  const waText = `*Nuevo Contacto Web - Nexos Ingeniería*\n\n*Nombre:* ${name}\n*Email:* ${email}${company ? `\n*Empresa:* ${company}` : ''}${service ? `\n*Servicio de Interés:* ${service}` : ''}\n\n*Mensaje:*\n${message}`;
+  const whatsappUrl = buildWhatsAppLink(waText);
+
   try {
     const emailResult = await sendEmail({
       name,
@@ -58,7 +68,8 @@ export async function processContactForm(formData: FormData): Promise<FormRespon
     if (!emailResult.success) {
       return {
         success: false,
-        message: emailResult.message || 'Ocurrió un error al enviar el mensaje. Intenta de nuevo.',
+        message: emailResult.message,
+        whatsappUrl,
       };
     }
 
@@ -71,7 +82,9 @@ export async function processContactForm(formData: FormData): Promise<FormRespon
     console.error('[Form Handler Error] processContactForm:', error);
     return {
       success: false,
-      message: 'Ocurrió un error inesperado al procesar tu solicitud. Por favor intenta de nuevo.',
+      message:
+        'Ocurrió una interrupción al enviar tu solicitud. Podés enviarla directamente por WhatsApp con un solo clic.',
+      whatsappUrl,
     };
   }
 }
@@ -121,6 +134,9 @@ export async function processQuoteForm(formData: FormData): Promise<FormResponse
     };
   }
 
+  const waText = `*Solicitud de Cotización Técnica - Nexos Ingeniería*\n\n*Nombre:* ${name}\n*Email:* ${email}${phone ? `\n*Teléfono:* ${phone}` : ''}${company ? `\n*Empresa:* ${company}` : ''}\n*Servicio:* ${service}${projectSize ? `\n*Dimensión:* ${projectSize}` : ''}${budget ? `\n*Presupuesto:* ${budget}` : ''}\n\n*Detalles del Proyecto:*\n${message}`;
+  const whatsappUrl = buildWhatsAppLink(waText);
+
   try {
     const emailResult = await sendEmail({
       name,
@@ -137,7 +153,8 @@ export async function processQuoteForm(formData: FormData): Promise<FormResponse
     if (!emailResult.success) {
       return {
         success: false,
-        message: emailResult.message || 'Ocurrió un error al enviar la cotización.',
+        message: emailResult.message,
+        whatsappUrl,
       };
     }
 
@@ -150,7 +167,9 @@ export async function processQuoteForm(formData: FormData): Promise<FormResponse
     console.error('[Form Handler Error] processQuoteForm:', error);
     return {
       success: false,
-      message: 'Ocurrió un error inesperado al procesar la cotización. Por favor intenta de nuevo.',
+      message:
+        'Ocurrió una interrupción al enviar la cotización. Podés enviarla directamente por WhatsApp con un solo clic.',
+      whatsappUrl,
     };
   }
 }
@@ -170,14 +189,25 @@ export async function processNewsletterForm(formData: FormData): Promise<FormRes
     };
   }
 
+  const waText = `*Suscripción a Boletín Técnico - Nexos Ingeniería*\n\n*Email:* ${email}`;
+  const whatsappUrl = buildWhatsAppLink(waText);
+
   try {
     const result = await sendEmail({ email, page: 'Newsletter' });
     if (!result.success) {
-      return { success: false, message: result.message || 'Error al suscribirte.' };
+      return {
+        success: false,
+        message: result.message || 'Error al suscribirte.',
+        whatsappUrl,
+      };
     }
     return { success: true, message: '¡Gracias por suscribirte a nuestro boletín técnico!' };
   } catch (error) {
     console.error('[Form Handler Error] processNewsletterForm:', error);
-    return { success: false, message: 'Ocurrió un error al procesar tu suscripción.' };
+    return {
+      success: false,
+      message: 'Ocurrió un error al procesar tu suscripción.',
+      whatsappUrl,
+    };
   }
 }

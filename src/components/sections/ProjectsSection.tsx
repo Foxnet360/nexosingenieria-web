@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { BuildingOffice, ArrowRight } from '@phosphor-icons/react';
+import { ArrowRight } from '@phosphor-icons/react';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
 
 interface Project {

@@ -12,9 +12,11 @@ const footerLinks = {
   soluciones: [
     { label: 'Cableado Estructurado', href: '/soluciones/cableado-estructurado' },
     { label: 'Seguridad Electrónica', href: '/soluciones/seguridad-electronica' },
-    { label: 'Eficiencia Energética', href: '/soluciones/eficiencia-energetica' },
-    { label: 'Audio y Video', href: '/soluciones/audio-video' },
-    { label: 'Domótica', href: '/soluciones/domotica' },
+    { label: 'Centros de Datos', href: '/soluciones/centros-de-datos' },
+    { label: 'Domótica & BMS', href: '/soluciones/domotica' },
+    { label: 'Control de Acceso', href: '/soluciones/control-acceso' },
+    { label: 'Audio & Video Profesional', href: '/soluciones/audio-video' },
+    { label: 'Mantenimiento & Soporte SLA', href: '/soluciones/mantenimiento' },
   ],
   industrias: [
     { label: 'Corporativo', href: '/industrias/corporativo' },

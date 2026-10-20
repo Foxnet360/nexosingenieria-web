@@ -107,8 +107,18 @@ export default function ContactoClientPage() {
                 />
 
                 {state?.success === false && (
-                  <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm">
-                    {state.message}
+                  <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm space-y-3">
+                    <p>{state.message}</p>
+                    {state.whatsappUrl && (
+                      <a
+                        href={state.whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-green-600 hover:bg-green-500 text-white font-medium rounded-lg transition-colors text-sm"
+                      >
+                        Enviar mensaje directo por WhatsApp
+                      </a>
+                    )}
                   </div>
                 )}
                 <div>

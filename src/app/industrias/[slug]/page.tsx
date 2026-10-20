@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
 import { Section } from '@/components/ui/Section';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
 import { Icon } from '@/components/ui/Icon';

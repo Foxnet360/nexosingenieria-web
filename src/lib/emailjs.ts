@@ -10,21 +10,37 @@ interface EmailData {
   [key: string]: string;
 }
 
-export async function sendEmail(data: EmailData): Promise<{ success: boolean; message: string }> {
-  if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
-    console.error('EmailJS not configured');
+export function isEmailConfigured(): boolean {
+  if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) return false;
+  if (
+    SERVICE_ID.includes('your-') ||
+    TEMPLATE_ID.includes('your-') ||
+    PUBLIC_KEY.includes('your-')
+  ) {
+    return false;
+  }
+  return true;
+}
+
+export async function sendEmail(
+  data: EmailData
+): Promise<{ success: boolean; message: string; configured: boolean }> {
+  if (!isEmailConfigured()) {
     return {
       success: false,
-      message: 'El servicio de correo no está configurado. Por favor contáctenos por teléfono.',
+      configured: false,
+      message:
+        'El canal de correo no está vinculado actualmente. Podés enviar tu mensaje de inmediato a través de nuestra línea directa de WhatsApp.',
     };
   }
 
   try {
     const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, data, PUBLIC_KEY);
-    
+
     if (response.status === 200) {
       return {
         success: true,
+        configured: true,
         message: 'Mensaje enviado exitosamente. Nos pondremos en contacto pronto.',
       };
     } else {
@@ -34,7 +50,9 @@ export async function sendEmail(data: EmailData): Promise<{ success: boolean; me
     console.error('EmailJS error:', error);
     return {
       success: false,
-      message: 'Error al enviar el mensaje. Por favor intente nuevamente o contáctenos por teléfono.',
+      configured: true,
+      message:
+        'Ocurrió una interrupción al enviar el mensaje. Podés comunicarte directamente vía WhatsApp.',
     };
   }
 }
