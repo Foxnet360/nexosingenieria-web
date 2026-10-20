@@ -22,24 +22,26 @@ Sitio web corporativo de Nexos Ingeniería SAS - Especialistas en integración t
 ## 🔧 Configuración
 
 1. **Clonar el repositorio**:
+
 ```bash
 git clone https://github.com/tu-usuario/nexosingenieria-web.git
 cd nexosingenieria-web
 ```
 
 2. **Instalar dependencias**:
+
 ```bash
 npm install
 ```
 
 3. **Configurar variables de entorno**:
+
 ```bash
 cp .env.production .env.local
 ```
 
 Editar `.env.local` con tus credenciales:
-- `NEXT_PUBLIC_SANITY_PROJECT_ID` - ID del proyecto Sanity
-- `NEXT_PUBLIC_SANITY_DATASET` - Dataset (production)
+
 - `NEXT_PUBLIC_EMAILJS_SERVICE_ID` - Service ID de EmailJS
 - `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID` - Template ID de EmailJS
 - `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY` - Public Key de EmailJS
@@ -62,6 +64,7 @@ Esto genera la carpeta `out/` con todos los archivos estáticos listos para subi
 
 1. Configurar credenciales FTP en `scripts/deploy.sh`
 2. Ejecutar:
+
 ```bash
 ./scripts/deploy.sh
 ```
@@ -105,6 +108,7 @@ scripts/
 ## 🎨 Sistema de Diseño
 
 ### Colores
+
 - `--color-bg-primary`: #0a0e1a (Fondo principal)
 - `--color-bg-secondary`: #111827 (Fondo secundario)
 - `--color-accent`: #00d4ff (Acento cyan)
@@ -113,6 +117,7 @@ scripts/
 - `--color-text-secondary`: #9ca3af (Texto secundario)
 
 ### Tipografía
+
 - **Display**: Space Grotesk
 - **Body**: Inter
 
@@ -169,6 +174,7 @@ BaconHacks es un estudio de desarrollo web especializado en crear experiencias d
 ## 📞 Contacto del Proyecto
 
 Para soporte técnico:
+
 - Email: soporte@nexosingenieria.com
 - Teléfono: +57 (6) 123-4567
 
