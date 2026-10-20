@@ -8,12 +8,13 @@ const featuredPosts = [
   {
     title: 'Guía Completa de Cableado Estructurado para Empresas Colombianas',
     excerpt:
-      'Estándares, categorías TIA/EIA, certificaciones de canal a 25 años y mejores prácticas para evitar cuellos de botella.',
+      'Parámetros ANSI/TIA-568.2-D, certificación Fluke DSX-8000 a 25 años y mejores prácticas para garantizar redes de alta disponibilidad.',
     slug: 'guia-cableado-estructurado-empresas-colombianas',
     date: '15 Ene 2024',
     category: 'Cableado Estructurado',
     readTime: '8 min',
     image: '/images/soluciones/cableado-estructurado.webp',
+    author: 'Diego Mauricio Toro (Director de Proyectos)',
   },
   {
     title: '5 Tendencias de Seguridad Electrónica para 2026',
@@ -24,16 +25,18 @@ const featuredPosts = [
     category: 'Seguridad',
     readTime: '6 min',
     image: '/images/soluciones/seguridad-electronica.webp',
+    author: 'Diego Mauricio Toro (Director de Proyectos)',
   },
   {
     title: 'Cómo Reducir el Consumo Energético en Edificios un 30%',
     excerpt:
-      'Estrategias prácticas de automatización BMS, control lumínico inteligente y sensores IoT con retorno de inversión comprobado.',
+      'Estrategias prácticas de automatización BMS, control lumínico DALI-2 y beneficios tributarios bajo la Ley 1715 de Colombia.',
     slug: 'reducir-consumo-energetico-edificios',
     date: '05 Ene 2024',
     category: 'Eficiencia Energética',
     readTime: '7 min',
     image: '/images/hero-industrias.webp',
+    author: 'Javier Ramírez Tafur (Gerente)',
   },
 ];
 
@@ -100,8 +103,11 @@ export function BlogPreviewSection() {
                       {post.title}
                     </h3>
 
-                    <p className="text-text-secondary text-sm leading-relaxed mb-4 line-clamp-3">
+                    <p className="text-text-secondary text-sm leading-relaxed mb-3 line-clamp-2">
                       {post.excerpt}
+                    </p>
+                    <p className="text-[11px] text-text-muted font-medium mb-3">
+                      Por <span className="text-text-secondary font-semibold">{post.author}</span>
                     </p>
                   </div>
 

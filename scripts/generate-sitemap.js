@@ -24,6 +24,7 @@ const staticRoutes = [
   { path: '/nosotros', priority: '0.7', changefreq: 'monthly' },
   { path: '/privacidad', priority: '0.3', changefreq: 'yearly' },
   { path: '/terminos', priority: '0.3', changefreq: 'yearly' },
+  { path: '/politica-datos', priority: '0.3', changefreq: 'yearly' },
 ];
 
 // Dynamic routes (blog posts)

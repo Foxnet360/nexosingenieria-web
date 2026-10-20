@@ -21,6 +21,10 @@ interface BlogPost {
   category: string;
   readTime: string;
   image: string;
+  author: {
+    name: string;
+    role: string;
+  };
 }
 
 const blogPosts: BlogPost[] = [
@@ -28,56 +32,76 @@ const blogPosts: BlogPost[] = [
     id: '1',
     title: 'Guía Completa de Cableado Estructurado para Empresas Colombianas',
     excerpt:
-      'Descubre todo lo que necesitas saber sobre cableado estructurado: estándares, categorías, certificaciones y mejores prácticas para tu empresa.',
+      'Parámetros ANSI/TIA-568.2-D, certificación Fluke DSX-8000 a 25 años y mejores prácticas para garantizar redes de alta disponibilidad.',
     slug: 'guia-cableado-estructurado-empresas-colombianas',
     date: '2024-01-15',
     category: 'Cableado Estructurado',
     readTime: '8 min',
     image: '/images/soluciones/cableado-estructurado.webp',
+    author: {
+      name: 'Diego Mauricio Toro',
+      role: 'Director de Proyectos',
+    },
   },
   {
     id: '2',
     title: '5 Tendencias de Seguridad Electrónica para 2026',
     excerpt:
-      'La seguridad electrónica evoluciona rápidamente. Conoce las 5 tendencias que definirán el mercado en los próximos años.',
+      'Analítica de video con IA en el borde, biometría facial 3D sin contacto, radares perimetrales y plataformas unificadas PSIM.',
     slug: '5-tendencias-seguridad-electronica-2026',
     date: '2024-01-10',
     category: 'Seguridad',
     readTime: '6 min',
     image: '/images/soluciones/seguridad-electronica.webp',
+    author: {
+      name: 'Diego Mauricio Toro',
+      role: 'Director de Proyectos',
+    },
   },
   {
     id: '3',
     title: 'Cómo Reducir el Consumo Energético en Edificios un 30%',
     excerpt:
-      'Estrategias prácticas y tecnologías para optimizar el consumo energético de tu edificio y reducir costos operativos.',
+      'Automatización BMS (BACnet/Modbus), control lumínico DALI-2, acreditaciones EDGE/LEED y beneficios tributarios bajo la Ley 1715.',
     slug: 'reducir-consumo-energetico-edificios',
     date: '2024-01-05',
     category: 'Eficiencia Energética',
     readTime: '7 min',
     image: '/images/hero-industrias.webp',
+    author: {
+      name: 'Javier Ramírez Tafur',
+      role: 'Gerente General',
+    },
   },
   {
     id: '4',
     title: 'Diseño de Salas de Juntas: Tecnología AV para Impresionar',
     excerpt:
-      'Guía completa para equipar salas de juntas con tecnología audiovisual de última generación que impresionará a tus clientes.',
+      'Ecosistemas One-Touch Join (MTR/Zoom Rooms), micrófonos beamforming de techo, encuadre de orador con IA y acústica RT60 controlada.',
     slug: 'diseno-salas-juntas-tecnologia-av',
     date: '2023-12-28',
     category: 'Audio y Video',
     readTime: '5 min',
     image: '/images/soluciones/audio-video.webp',
+    author: {
+      name: 'Diego Mauricio Toro',
+      role: 'Director de Proyectos',
+    },
   },
   {
     id: '5',
     title: 'Checklist: Infraestructura de Red para Edificios Inteligentes',
     excerpt:
-      'Lista de verificación completa para evaluar si tu infraestructura de red está lista para soportar un edificio inteligente.',
+      'Guía técnica y ejecutiva para evaluar canalizaciones, capacidad PoE++, fibra óptica backbone, UPS y documentación as-built.',
     slug: 'checklist-infraestructura-red-edificios-inteligentes',
     date: '2023-12-20',
     category: 'Cableado Estructurado',
     readTime: '10 min',
     image: '/images/soluciones/centros-de-datos.webp',
+    author: {
+      name: 'Javier Ramírez Tafur',
+      role: 'Gerente General',
+    },
   },
 ];
 
@@ -168,13 +192,16 @@ export default function BlogPage() {
 
                     <div className="p-6 flex flex-col flex-grow justify-between">
                       <div>
-                        <time className="text-accent/80 text-xs font-mono mb-2 block">
-                          {new Date(post.date).toLocaleDateString('es-CO', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
-                          })}
-                        </time>
+                        <div className="flex items-center justify-between text-xs font-mono text-text-muted mb-2">
+                          <time className="text-accent/80">
+                            {new Date(post.date).toLocaleDateString('es-CO', {
+                              year: 'numeric',
+                              month: 'short',
+                              day: 'numeric',
+                            })}
+                          </time>
+                          <span className="text-text-muted text-[11px]">{post.author.name}</span>
+                        </div>
 
                         <h2 className="text-xl font-bold text-text-primary mb-3 group-hover:text-accent transition-colors leading-snug line-clamp-2">
                           {post.title}
@@ -185,9 +212,13 @@ export default function BlogPage() {
                         </p>
                       </div>
 
-                      <div className="pt-4 border-t border-border/60 flex items-center justify-between text-xs font-medium text-accent group-hover:translate-x-1 transition-transform">
-                        <span>Leer artículo completo</span>
-                        <span>→</span>
+                      <div className="pt-4 border-t border-border/60 flex items-center justify-between text-xs font-medium group-hover:translate-x-1 transition-transform">
+                        <span className="text-text-muted text-[11px] font-normal">
+                          {post.author.role}
+                        </span>
+                        <span className="flex items-center gap-1 font-semibold text-accent">
+                          Leer artículo →
+                        </span>
                       </div>
                     </div>
                   </Link>

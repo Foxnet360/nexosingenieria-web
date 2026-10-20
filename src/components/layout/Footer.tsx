@@ -100,13 +100,16 @@ export function Footer() {
               <Image
                 src="/images/logo-full.svg"
                 alt="Nexos Ingeniería"
-                className="h-14 w-auto"
-                width={200}
-                height={56}
+                className="h-12 md:h-14 w-auto"
+                width={220}
+                height={60}
               />
             </Link>
-            <p className="text-text-secondary mb-6 max-w-sm">{empresaData.descripcionCorta}</p>
+            <p className="text-text-secondary mb-4 max-w-sm">{empresaData.descripcionCorta}</p>
             <div className="space-y-2 text-sm text-text-secondary mb-6">
+              <p className="font-[family-name:var(--font-geist-mono)] text-xs text-text-muted">
+                NIT: 900.230.435-1 · Rep. Legal: Javier Ramírez Tafur
+              </p>
               <p className="font-[family-name:var(--font-geist-mono)]">
                 📍 {contactoData.direccion}
               </p>
@@ -175,21 +178,25 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-text-muted text-sm">
-            © {new Date().getFullYear()} Nexos Ingeniería SAS. Todos los derechos reservados.
+          <p className="text-text-muted text-xs md:text-sm text-center md:text-left">
+            © {new Date().getFullYear()} Nexos Ingeniería S.A.S. — NIT: 900.230.435-1. Todos los
+            derechos reservados.
           </p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-xs md:text-sm">
             <Link
               href="/privacidad"
-              className="text-text-muted hover:text-text-secondary text-sm transition-colors"
+              className="text-text-muted hover:text-accent transition-colors"
             >
               Privacidad
             </Link>
+            <Link href="/terminos" className="text-text-muted hover:text-accent transition-colors">
+              Términos de Uso
+            </Link>
             <Link
-              href="/terminos"
-              className="text-text-muted hover:text-text-secondary text-sm transition-colors"
+              href="/politica-datos"
+              className="text-text-muted hover:text-accent transition-colors"
             >
-              Términos
+              Tratamiento de Datos
             </Link>
           </div>
         </div>
