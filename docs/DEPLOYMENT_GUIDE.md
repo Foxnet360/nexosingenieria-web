@@ -33,25 +33,84 @@ NEXT_PUBLIC_SITE_URL=https://nexosingenieria.com
 ## Proceso de Build
 
 1. **Instalar dependencias**:
+
 ```bash
 npm install
 ```
 
 2. **Generar build de producción**:
+
 ```bash
 npm run build
 ```
 
 Este comando:
+
 - Optimiza imágenes (WebP/AVIF)
 - Genera sitemap.xml
 - Compila el sitio estático en `out/`
 
-## Despliegue en Hostinger
+## Despliegue en Railway (Producción Actual)
 
-### Opción 1: Script Automático
+El despliegue del frontend se realiza en Railway mediante Nixpacks (`railway.json`).
+
+### 1. Variables de Entorno en Railway
+
+Configurar en Railway Dashboard > Servicio > **Variables**:
+
+- `NODE_ENV=production`
+- `NEXT_PUBLIC_SITE_URL=https://nexosingenieria.com`
+- Variables de Sanity y EmailJS según `.env.production`.
+
+### 2. Configuración de Dominio Personalizado en Railway
+
+1. Ir a **Settings** > **Networking** > **Custom Domain**.
+2. Agregar:
+   - `nexosingenieria.com`
+   - `www.nexosingenieria.com`
+3. Railway generará un registro CNAME (ej. `xxxx.up.railway.app`) y un registro TXT de verificación `_railway-verify`.
+
+---
+
+## Configuración de DNS en Hostinger (Preservando Correos)
+
+Para apuntar la web a Railway sin afectar los correos del hosting compartido (`45.79.23.185`):
+
+### 1. Pre-cargar registros en Hostinger DNS Zone Editor
+
+Antes de cambiar los Name Servers, registrar en Hostinger:
+
+| Tipo    | Nombre               | Valor / Destino                                                                     | Propósito                         |
+| :------ | :------------------- | :---------------------------------------------------------------------------------- | :-------------------------------- |
+| `A`     | `mail`               | `45.79.23.185`                                                                      | IP directa del servidor de correo |
+| `MX`    | `@`                  | `mail.nexosingenieria.com` (Prioridad 0)                                            | Servidor de correo desacoplado    |
+| `A`     | `webmail`            | `45.79.23.185`                                                                      | Acceso a Webmail                  |
+| `A`     | `cpanel`             | `45.79.23.185`                                                                      | Acceso a cPanel del hosting       |
+| `TXT`   | `@`                  | `v=spf1 ip4:45.79.23.185 include:relay.mailbaby.net ip4:104.237.139.26 +a +mx ~all` | SPF                               |
+| `TXT`   | `default._domainkey` | `v=DKIM1; k=rsa; p=MIIBIjAN...`                                                     | Clave DKIM actual                 |
+| `TXT`   | `_railway-verify`    | `railway-verify=...`                                                                | Verificación de Railway           |
+| `CNAME` | `@`                  | `<proyecto>.up.railway.app`                                                         | Tráfico web raíz a Railway        |
+| `CNAME` | `www`                | `<proyecto>.up.railway.app`                                                         | Tráfico www a Railway             |
+
+### 2. Cambiar Name Servers a Hostinger
+
+1. En Hostinger > **Dominios** > `nexosingenieria.com` > **Servidores de nombres**.
+2. Seleccionar **Usar servidores de nombres de Hostinger** (`ns1.dns-parking.com` / `ns2.dns-parking.com`).
+
+### 3. Verificación Automatizada
+
+Ejecutar el script de auditoría en cualquier momento:
+
+```bash
+./scripts/verify-dns.sh
+```
+
+---
+
+## Despliegue en Hostinger (Legacy / Fallback FTP)
 
 1. Configurar credenciales en `scripts/deploy.sh`:
+
 ```bash
 HOSTINGER_HOST="ftp.nexosingenieria.com"
 HOSTINGER_USER="tu-usuario"
@@ -59,6 +118,7 @@ HOSTINGER_PASS="tu-contraseña"
 ```
 
 2. Ejecutar:
+
 ```bash
 ./scripts/deploy.sh
 ```
@@ -83,6 +143,7 @@ HOSTINGER_PASS="tu-contraseña"
 ### Opción 3: Git (si disponible)
 
 Si Hostinger soporta Git:
+
 ```bash
 git push hostinger main
 ```
@@ -123,6 +184,7 @@ Si algo sale mal:
 
 1. Mantener backup anterior en `public_html_backup/`
 2. Restaurar desde backup:
+
 ```bash
 # Via SSH (si disponible)
 cp -r public_html_backup/* public_html/
@@ -163,12 +225,14 @@ Si es necesario apuntar dominio:
 ## Mantenimiento Regular
 
 ### Mensual
+
 - [ ] Revisar logs de errores
 - [ ] Actualizar dependencias: `npm update`
 - [ ] Verificar enlaces rotos
 - [ ] Revisar performance en Lighthouse
 
 ### Trimestral
+
 - [ ] Actualizar contenido obsoleto
 - [ ] Revisar y optimizar imágenes nuevas
 - [ ] Analizar métricas de Analytics
@@ -177,14 +241,17 @@ Si es necesario apuntar dominio:
 ## Solución de Problemas
 
 ### Error 404 en rutas
+
 - Verificar `next.config.ts` tenga output: 'export'
 - Asegurar que todas las rutas usen generateStaticParams
 
 ### Imágenes no cargan
+
 - Verificar que las imágenes WebP existan en `public/images/`
 - Comprobar que el script de optimización se ejecutó
 
 ### Formularios no funcionan
+
 - Verificar variables de EmailJS
 - Revisar consola del navegador por errores
 - Confirmar que el template de EmailJS está activo
