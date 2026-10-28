@@ -71,7 +71,7 @@ echo ""
 # 6. Conectividad HTTP/HTTPS
 echo -e "${YELLOW}[6/6] Verificación HTTP/HTTPS:${NC}"
 STATUS_APEX=$(curl -s -o /dev/null -w "%{http_code}" -L --connect-timeout 5 "https://$DOMAIN" 2>/dev/null || echo "FAIL")
-STATUS_WWW=$(curl -s -o /dev/null -w "%{http_code}" -L --connect-timeout 5 "https://www.www.$DOMAIN" 2>/dev/null || echo "FAIL")
+STATUS_WWW=$(curl -s -o /dev/null -w "%{http_code}" -L --connect-timeout 5 "https://www.$DOMAIN" 2>/dev/null || echo "FAIL")
 echo "HTTP Status https://$DOMAIN: $STATUS_APEX"
 echo "HTTP Status https://www.nexosingenieria.com: $STATUS_WWW"
 
