@@ -80,17 +80,18 @@ Para apuntar la web a Railway sin afectar los correos del hosting compartido (`4
 
 Antes de cambiar los Name Servers, registrar en Hostinger:
 
-| Tipo    | Nombre               | Valor / Destino                                                                     | Propósito                         |
-| :------ | :------------------- | :---------------------------------------------------------------------------------- | :-------------------------------- |
-| `A`     | `mail`               | `45.79.23.185`                                                                      | IP directa del servidor de correo |
-| `MX`    | `@`                  | `mail.nexosingenieria.com` (Prioridad 0)                                            | Servidor de correo desacoplado    |
-| `A`     | `webmail`            | `45.79.23.185`                                                                      | Acceso a Webmail                  |
-| `A`     | `cpanel`             | `45.79.23.185`                                                                      | Acceso a cPanel del hosting       |
-| `TXT`   | `@`                  | `v=spf1 ip4:45.79.23.185 include:relay.mailbaby.net ip4:104.237.139.26 +a +mx ~all` | SPF                               |
-| `TXT`   | `default._domainkey` | `v=DKIM1; k=rsa; p=MIIBIjAN...`                                                     | Clave DKIM actual                 |
-| `TXT`   | `_railway-verify`    | `railway-verify=...`                                                                | Verificación de Railway           |
-| `CNAME` | `@`                  | `<proyecto>.up.railway.app`                                                         | Tráfico web raíz a Railway        |
-| `CNAME` | `www`                | `<proyecto>.up.railway.app`                                                         | Tráfico www a Railway             |
+| Tipo    | Nombre                | Valor / Destino                                                                     | Propósito                         |
+| :------ | :-------------------- | :---------------------------------------------------------------------------------- | :-------------------------------- |
+| `A`     | `mail`                | `45.79.23.185`                                                                      | IP directa del servidor de correo |
+| `MX`    | `@`                   | `mail.nexosingenieria.com` (Prioridad 0)                                            | Servidor de correo desacoplado    |
+| `A`     | `webmail`             | `45.79.23.185`                                                                      | Acceso a Webmail                  |
+| `A`     | `cpanel`              | `45.79.23.185`                                                                      | Acceso a cPanel del hosting       |
+| `TXT`   | `@`                   | `v=spf1 ip4:45.79.23.185 include:relay.mailbaby.net ip4:104.237.139.26 +a +mx ~all` | SPF                               |
+| `TXT`   | `default._domainkey`  | `v=DKIM1; k=rsa; p=MIIBIjAN...`                                                     | Clave DKIM actual                 |
+| `TXT`   | `_railway-verify`     | `railway-verify=efdff7753bd0c5b201fcc948ab5f4fc143ef602c4e2279e2d381126b65d8b299`   | Verificación Railway raíz         |
+| `TXT`   | `_railway-verify.www` | `railway-verify=0638f6e805dab42456f865c34380953055c5bcd871145662ad8d958ee6879b49`   | Verificación Railway www          |
+| `CNAME` | `@`                   | `bpc0gbwm.up.railway.app`                                                           | Tráfico web raíz a Railway        |
+| `CNAME` | `www`                 | `0ghcyot7.up.railway.app`                                                           | Tráfico www a Railway             |
 
 ### 2. Cambiar Name Servers a Hostinger
 
