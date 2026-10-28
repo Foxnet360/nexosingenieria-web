@@ -1,5 +1,3 @@
-import { sendEmail } from '@/lib/emailjs';
-
 const WHATSAPP_PHONE = '573155089404';
 
 export interface FormResponse {
@@ -11,6 +9,31 @@ export interface FormResponse {
 
 export function buildWhatsAppLink(text: string): string {
   return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`;
+}
+
+async function submitToContactApi(data: Record<string, string>): Promise<{
+  success: boolean;
+  message: string;
+  configured?: boolean;
+}> {
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    return await res.json();
+  } catch (error) {
+    console.error('[submitToContactApi error]:', error);
+    return {
+      success: false,
+      message:
+        'Ocurrió una interrupción al conectar con el servidor. Podés comunicarte directamente vía WhatsApp.',
+    };
+  }
 }
 
 export async function processContactForm(formData: FormData): Promise<FormResponse> {
@@ -56,7 +79,7 @@ export async function processContactForm(formData: FormData): Promise<FormRespon
   const whatsappUrl = buildWhatsAppLink(waText);
 
   try {
-    const emailResult = await sendEmail({
+    const emailResult = await submitToContactApi({
       name,
       email,
       company,
@@ -76,7 +99,8 @@ export async function processContactForm(formData: FormData): Promise<FormRespon
     return {
       success: true,
       message:
-        '¡Mensaje enviado con éxito! Nuestro equipo técnico te responderá en menos de 24 horas hábiles.',
+        emailResult.message ||
+        '¡Mensaje enviado con éxito! Te hemos enviado un correo de confirmación y nuestro equipo técnico te responderá en menos de 24 horas hábiles.',
     };
   } catch (error) {
     console.error('[Form Handler Error] processContactForm:', error);
@@ -138,7 +162,7 @@ export async function processQuoteForm(formData: FormData): Promise<FormResponse
   const whatsappUrl = buildWhatsAppLink(waText);
 
   try {
-    const emailResult = await sendEmail({
+    const emailResult = await submitToContactApi({
       name,
       email,
       company,
@@ -161,6 +185,7 @@ export async function processQuoteForm(formData: FormData): Promise<FormResponse
     return {
       success: true,
       message:
+        emailResult.message ||
         '¡Solicitud de cotización recibida! Un especialista técnico analizará tus requerimientos y se contactará en menos de 48 horas.',
     };
   } catch (error) {
@@ -193,7 +218,11 @@ export async function processNewsletterForm(formData: FormData): Promise<FormRes
   const whatsappUrl = buildWhatsAppLink(waText);
 
   try {
-    const result = await sendEmail({ email, page: 'Newsletter' });
+    const result = await submitToContactApi({
+      email,
+      page: 'Newsletter',
+      message: 'Suscripción a Boletín Técnico',
+    });
     if (!result.success) {
       return {
         success: false,
