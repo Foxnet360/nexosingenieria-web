@@ -23,7 +23,7 @@ export function WhatsAppButton({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        'fixed bottom-20 md:bottom-6 right-6 z-50',
+        'fixed bottom-20 md:bottom-6 right-6 z-40',
         'w-14 h-14 bg-green-500 rounded-full',
         'flex items-center justify-center',
         'shadow-lg shadow-green-500/30',
