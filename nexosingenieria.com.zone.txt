@@ -1,5 +1,5 @@
 ; BIND Zone File para nexosingenieria.com
-; Listo para importar en Hostinger DNS Zone Editor
+; Compatible con PowerDNS / Hostinger Import
 $ORIGIN nexosingenieria.com.
 $TTL 14400
 
@@ -19,7 +19,7 @@ cpanel                  14400   IN      A       45.79.23.185
 ; 3. AUTENTICACIÓN DE CORREO (SPF y DKIM)
 ; ====================================================================
 @                       14400   IN      TXT     "v=spf1 ip4:45.79.23.185 include:relay.mailbaby.net ip4:104.237.139.26 +a +mx ~all"
-default._domainkey      14400   IN      TXT     ( "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyw4Joz3qX70b1YXKqF0Uq5IJX505u7n0ZkTOGlbwGLEhSfafDNRQw/aJ1xhOqqGIx2BziGpKQZg2uAFx6Zv26N+31fqI35Rhvk+12SY78z41L9ghElLroppLO4BC2EnZgauhrwhzO0TEBYYGRA3Ck02X3U8CvwlYLcB31SSwrTEANmKHXSPkLQXrD1N78Xt1q" "bQHZDClRDj6RkpJ32chgktBoU1L6Ncs+uCdcIegdvcoM4RUbEsORb39HLlyGofA2w9y38YsHwzU+iMQDo4jzIGctfdHk25sAshz7iO23Xr/Tt0rz7zko9LOS03VSAnwivX1ziFDCYFia5bruFrsTQIDAQAB;" )
+default._domainkey      14400   IN      TXT     "v=DKIM1\; k=rsa\; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyw4Joz3qX70b1YXKqF0Uq5IJX505u7n0ZkTOGlbwGLEhSfafDNRQw/aJ1xhOqqGIx2BziGpKQZg2uAFx6Zv26N+31fqI35Rhvk+12SY78z41L9ghElLroppLO4BC2EnZgauhrwhzO0TEBYYGRA3Ck02X3U8CvwlYLcB31SSwrTEANmKHXSPkLQXrD1N78Xt1qbQHZDClRDj6RkpJ32chgktBoU1L6Ncs+uCdcIegdvcoM4RUbEsORb39HLlyGofA2w9y38YsHwzU+iMQDo4jzIGctfdHk25sAshz7iO23Xr/Tt0rz7zko9LOS03VSAnwivX1ziFDCYFia5bruFrsTQIDAQAB\;"
 
 ; ====================================================================
 ; 4. VERIFICACIÓN DE PROPIEDAD RAILWAY
