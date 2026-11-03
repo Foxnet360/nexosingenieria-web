@@ -11,7 +11,6 @@ const staticRoutes = [
   { path: '/soluciones/cableado-estructurado', priority: '0.8', changefreq: 'monthly' },
   { path: '/soluciones/seguridad-electronica', priority: '0.8', changefreq: 'monthly' },
   { path: '/soluciones/audio-video', priority: '0.8', changefreq: 'monthly' },
-  { path: '/soluciones/eficiencia-energetica', priority: '0.8', changefreq: 'monthly' },
   { path: '/soluciones/domotica', priority: '0.8', changefreq: 'monthly' },
   { path: '/soluciones/centros-de-datos', priority: '0.7', changefreq: 'monthly' },
   { path: '/soluciones/control-acceso', priority: '0.7', changefreq: 'monthly' },
@@ -38,17 +37,18 @@ const blogPosts = [
 
 // Dynamic routes (projects)
 const projects = [
-  { slug: 'subestacion-centenario-edeq', date: '2024-02-01' },
+  { slug: 'edeq-sedes-y-bms', date: '2024-02-01' },
   { slug: 'unad-edificio-celestino-mutis', date: '2024-01-25' },
   { slug: 'centro-empresarial-icono', date: '2024-01-15' },
   { slug: 'seniors-club-pance', date: '2023-11-20' },
+  { slug: 'subestacion-calarca-edeq', date: '2024-01-20' },
   { slug: 'bosque-residencial-la-pradera', date: '2023-10-10' },
-  { slug: 'sede-financiera-nacional', date: '2024-01-20' },
-  { slug: 'cadena-retail-25-tiendas', date: '2023-06-15' },
-  { slug: 'hotel-boutique-armenia', date: '2023-09-10' },
-  { slug: 'clinica-quindio', date: '2023-11-05' },
-  { slug: 'universidad-eje-cafetero', date: '2024-01-10' },
-  { slug: 'planta-manufactura', date: '2023-08-20' },
+  { slug: 'uci-neonatal-armenia', date: '2023-11-05' },
+  { slug: 'inversiones-barake-garcia-ibg', date: '2023-08-20' },
+  { slug: 'subestacion-centenario-sil-edeq', date: '2024-02-01' },
+  { slug: 'contraloria-bogota', date: '2024-01-10' },
+  { slug: 'redes-incendio-conjuntos-uraki', date: '2023-09-10' },
+  { slug: 'palacio-de-justicia-armenia', date: '2023-06-15' },
 ];
 
 // Dynamic routes (industries)
@@ -58,7 +58,7 @@ const industries = [
   { slug: 'salud', date: '2024-01-01' },
   { slug: 'educacion', date: '2024-01-01' },
   { slug: 'industrial', date: '2024-01-01' },
-  { slug: 'residencial', date: '2024-01-01' },
+  { slug: 'hospitality', date: '2024-01-01' },
 ];
 
 function generateSitemap() {

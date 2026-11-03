@@ -4,30 +4,26 @@
 
 - Node.js 20+
 - npm
-- Acceso FTP a Hostinger
-- Credenciales de Sanity
-- Credenciales de EmailJS
+- Credenciales SMTP (cPanel / Winkhosting)
 
 ## Variables de Entorno
 
 Crear archivo `.env.local`:
 
 ```env
-# Sanity CMS
-NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
-NEXT_PUBLIC_SANITY_DATASET=production
-NEXT_PUBLIC_SANITY_API_VERSION=2024-04-29
+# Site URL
+NEXT_PUBLIC_SITE_URL=https://nexosingenieria.com
 
 # Google Analytics (opcional)
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 
-# EmailJS
-NEXT_PUBLIC_EMAILJS_SERVICE_ID=your-service-id
-NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your-template-id
-NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your-public-key
-
-# Site URL
-NEXT_PUBLIC_SITE_URL=https://nexosingenieria.com
+# Configuración SMTP (cPanel)
+SMTP_HOST=mail.nexosingenieria.com
+SMTP_PORT=465
+SMTP_USER=comercial@nexosingenieria.com
+SMTP_PASS=tu-contrasena-cpanel
+SMTP_FROM="Nexos Ingeniería <comercial@nexosingenieria.com>"
+COMMERCIAL_EMAIL=comercial@nexosingenieria.com
 ```
 
 ## Proceso de Build
@@ -60,7 +56,7 @@ Configurar en Railway Dashboard > Servicio > **Variables**:
 
 - `NODE_ENV=production`
 - `NEXT_PUBLIC_SITE_URL=https://nexosingenieria.com`
-- Variables de Sanity y EmailJS según `.env.production`.
+- Variables SMTP según `.env.production` o `.env.example`.
 
 ### 2. Configuración de Dominio Personalizado en Railway
 
@@ -237,7 +233,7 @@ Si es necesario apuntar dominio:
 - [ ] Actualizar contenido obsoleto
 - [ ] Revisar y optimizar imágenes nuevas
 - [ ] Analizar métricas de Analytics
-- [ ] Hacer backup de base de datos Sanity
+- [ ] Revisar estado de entregabilidad y logs de correo SMTP
 
 ## Solución de Problemas
 
@@ -253,15 +249,9 @@ Si es necesario apuntar dominio:
 
 ### Formularios no funcionan
 
-- Verificar variables de EmailJS
-- Revisar consola del navegador por errores
-- Confirmar que el template de EmailJS está activo
-
-## Contacto de Soporte
-
-- **Desarrollo**: soporte@nexosingenieria.com
-- **Hostinger**: Soporte via panel de control
-- **Sanity**: docs.sanity.io
+- Verificar variables SMTP (`SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`) en Railway.
+- Revisar logs del servidor en Railway: `[Mailer] SMTP not configured` o errores de autenticación.
+- Verificar que el puerto 465 (SSL) o 587 (TLS) esté abierto en el servidor de correo.
 
 ## Checklist Final
 
