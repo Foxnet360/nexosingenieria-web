@@ -3,6 +3,7 @@ export interface Author {
   role: string;
   bio: string;
   initials: string;
+  linkedin?: string;
 }
 
 export interface BlogPost {
@@ -25,12 +26,14 @@ const authors: Record<'javier' | 'diego', Author> = {
     role: 'Gerente General',
     bio: 'Ingeniero y líder directivo en Nexos Ingeniería SAS. Especialista en formulación de proyectos tecnológicos estratégicos, eficiencia energética BMS, modernización de instalaciones y cumplimiento normativo en Colombia.',
     initials: 'JR',
+    linkedin: 'https://www.linkedin.com/in/javier-andres-ramirez-tafur-91b65139/',
   },
   diego: {
     name: 'Diego Mauricio Toro',
     role: 'Director de Proyectos',
     bio: 'Director de Proyectos e Ingeniería en Nexos Ingeniería SAS. Especialista en diseño e implementación de redes de cableado estructurado certificado, seguridad electrónica convergente, centros de datos y automatización para edificios inteligentes.',
     initials: 'DT',
+    linkedin: 'https://www.linkedin.com/in/diegotoro/',
   },
 };
 

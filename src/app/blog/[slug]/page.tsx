@@ -135,14 +135,25 @@ export default async function BlogPostPage({ params }: PageProps) {
             <div className="w-16 h-16 bg-accent/15 border border-accent/30 rounded-2xl flex items-center justify-center text-xl font-bold text-accent shrink-0">
               {post.author.initials}
             </div>
-            <div>
+            <div className="flex-1">
               <div className="flex flex-wrap items-baseline gap-2 mb-1">
                 <h4 className="text-text-primary font-bold text-base">{post.author.name}</h4>
                 <span className="px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-medium">
                   {post.author.role}
                 </span>
               </div>
-              <p className="text-text-secondary text-sm leading-relaxed">{post.author.bio}</p>
+              <p className="text-text-secondary text-sm leading-relaxed mb-3">{post.author.bio}</p>
+              {post.author.linkedin && (
+                <a
+                  href={post.author.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs text-accent hover:underline font-medium"
+                >
+                  <Icon name="linkedin-logo" size="sm" />
+                  Perfil en LinkedIn
+                </a>
+              )}
             </div>
           </div>
 

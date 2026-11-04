@@ -25,6 +25,7 @@ import {
   Pulse,
   Article,
   LinkedinLogo,
+  InstagramLogo,
   XLogo,
   FacebookLogo,
   WhatsappLogo,
@@ -65,6 +66,7 @@ export type IconName =
   | 'pulse'
   | 'article'
   | 'linkedin-logo'
+  | 'instagram-logo'
   | 'x-logo'
   | 'facebook-logo'
   | 'whatsapp-logo'
@@ -107,6 +109,7 @@ const iconRegistry: Record<IconName, PhosphorIcon> = {
   pulse: Pulse,
   article: Article,
   'linkedin-logo': LinkedinLogo,
+  'instagram-logo': InstagramLogo,
   'x-logo': XLogo,
   'facebook-logo': FacebookLogo,
   'whatsapp-logo': WhatsappLogo,
@@ -186,11 +189,7 @@ export const Icon = React.memo(
       return (
         <span
           ref={ref}
-          className={cn(
-            'inline-flex items-center justify-center',
-            glowClass,
-            className
-          )}
+          className={cn('inline-flex items-center justify-center', glowClass, className)}
           aria-hidden={!ariaLabel}
           aria-label={ariaLabel}
           {...props}

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Section } from '@/components/ui/Section';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
 import { AlliedBrandsSection } from '@/components/sections/AlliedBrandsSection';
+import { Icon } from '@/components/ui/Icon';
 import { empresaData, statsData, valoresData } from '@/data/scraped-content';
 
 export const metadata: Metadata = {
@@ -103,6 +104,82 @@ export default function NosotrosPage() {
                 </div>
               </AnimatedElement>
             ))}
+          </div>
+        </div>
+      </Section>
+
+      <Section background="secondary" padding="xl">
+        <div className="max-w-7xl mx-auto">
+          <AnimatedElement animation="fade-in">
+            <h2 className="text-3xl font-bold text-text-primary text-center mb-4 font-[family-name:var(--font-geist-sans)]">
+              Equipo Directivo y de Ingeniería
+            </h2>
+            <p className="text-text-secondary text-center max-w-2xl mx-auto mb-12">
+              Liderazgo con más de dos décadas de experiencia ejecutando proyectos de
+              infraestructura, telecomunicaciones y sistemas BMS en Colombia.
+            </p>
+          </AnimatedElement>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <AnimatedElement animation="slide-up" delay={100}>
+              <div className="bg-bg-card border border-border rounded-2xl p-8 hover:border-accent/40 transition-colors h-full flex flex-col justify-between">
+                <div>
+                  <div className="w-16 h-16 rounded-2xl bg-accent/15 border border-accent/30 text-accent font-bold text-xl flex items-center justify-center mb-5">
+                    JR
+                  </div>
+                  <h3 className="text-xl font-bold text-text-primary mb-1">Javier Ramírez Tafur</h3>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-accent block mb-3">
+                    Gerente General
+                  </span>
+                  <p className="text-text-secondary text-sm leading-relaxed mb-6">
+                    Ingeniero y líder directivo en Nexos Ingeniería SAS. Especialista en formulación
+                    de proyectos tecnológicos estratégicos, eficiencia energética BMS, modernización
+                    de instalaciones y cumplimiento normativo en Colombia.
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-border">
+                  <a
+                    href="https://www.linkedin.com/in/javier-andres-ramirez-tafur-91b65139/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm text-accent hover:underline font-medium"
+                  >
+                    <Icon name="linkedin-logo" size="sm" />
+                    Conectar en LinkedIn
+                  </a>
+                </div>
+              </div>
+            </AnimatedElement>
+
+            <AnimatedElement animation="slide-up" delay={200}>
+              <div className="bg-bg-card border border-border rounded-2xl p-8 hover:border-accent/40 transition-colors h-full flex flex-col justify-between">
+                <div>
+                  <div className="w-16 h-16 rounded-2xl bg-accent/15 border border-accent/30 text-accent font-bold text-xl flex items-center justify-center mb-5">
+                    DT
+                  </div>
+                  <h3 className="text-xl font-bold text-text-primary mb-1">Diego Mauricio Toro</h3>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-accent block mb-3">
+                    Director de Proyectos
+                  </span>
+                  <p className="text-text-secondary text-sm leading-relaxed mb-6">
+                    Director de Proyectos e Ingeniería en Nexos Ingeniería SAS. Especialista en
+                    diseño e implementación de redes de cableado estructurado certificado, seguridad
+                    electrónica convergente, centros de datos y automatización para edificios
+                    inteligentes.
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-border">
+                  <a
+                    href="https://www.linkedin.com/in/diegotoro/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm text-accent hover:underline font-medium"
+                  >
+                    <Icon name="linkedin-logo" size="sm" />
+                    Conectar en LinkedIn
+                  </a>
+                </div>
+              </div>
+            </AnimatedElement>
           </div>
         </div>
       </Section>

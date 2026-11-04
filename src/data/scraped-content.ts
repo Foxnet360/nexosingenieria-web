@@ -2,7 +2,7 @@
  * Datos extraídos de nexosingenieria.com
  * Fecha de extracción: 2026-04-28
  * Fuente: https://nexosingenieria.com
- * 
+ *
  * Este archivo centraliza todos los datos scrapeados del sitio original
  * para su uso en el nuevo sitio Next.js.
  */
@@ -171,7 +171,7 @@ export const contactoData: ContactoData = {
   redesSociales: {
     facebook: 'https://facebook.com/nexosingenieria',
     instagram: 'https://instagram.com/nexosing',
-    linkedin: 'https://linkedin.com/company/nexos-ingenieria',
+    linkedin: 'https://www.linkedin.com/company/7054895',
   },
 };
 
@@ -183,7 +183,8 @@ export const proyectosData: ProyectoImage[] = [
   {
     id: 'proyecto-1',
     filename: '0ad41befd852.jpg',
-    originalUrl: 'https://www.nexosingenieria.com/wp-content/uploads/2020/07/D71D804F-6FBF-4EE4-803D-5B2AEA53F12A-400x284.jpg',
+    originalUrl:
+      'https://www.nexosingenieria.com/wp-content/uploads/2020/07/D71D804F-6FBF-4EE4-803D-5B2AEA53F12A-400x284.jpg',
     localPath: '/images/proyectos/0ad41befd852.jpg',
     alt: 'Proyecto de seguridad electrónica - Nexos Ingeniería',
     dimensions: { width: 400, height: 284 },
@@ -191,7 +192,8 @@ export const proyectosData: ProyectoImage[] = [
   {
     id: 'proyecto-2',
     filename: '1a7db0d96073.jpg',
-    originalUrl: 'https://www.nexosingenieria.com/wp-content/uploads/2020/07/870D6E2B-D895-4E54-9643-49196EFA2521-400x284.jpg',
+    originalUrl:
+      'https://www.nexosingenieria.com/wp-content/uploads/2020/07/870D6E2B-D895-4E54-9643-49196EFA2521-400x284.jpg',
     localPath: '/images/proyectos/1a7db0d96073.jpg',
     alt: 'Proyecto de cableado estructurado - Nexos Ingeniería',
     dimensions: { width: 400, height: 284 },
@@ -199,7 +201,8 @@ export const proyectosData: ProyectoImage[] = [
   {
     id: 'proyecto-3',
     filename: '33b24e3cf0d6.jpg',
-    originalUrl: 'https://www.nexosingenieria.com/wp-content/uploads/2020/07/50AFCAC3-4F7F-40EE-B67F-1CD3553E2AEC-400x284.jpg',
+    originalUrl:
+      'https://www.nexosingenieria.com/wp-content/uploads/2020/07/50AFCAC3-4F7F-40EE-B67F-1CD3553E2AEC-400x284.jpg',
     localPath: '/images/proyectos/33b24e3cf0d6.jpg',
     alt: 'Proyecto de automatización - Nexos Ingeniería',
     dimensions: { width: 400, height: 284 },
@@ -207,7 +210,8 @@ export const proyectosData: ProyectoImage[] = [
   {
     id: 'proyecto-4',
     filename: '53a9edd9f4fb.jpg',
-    originalUrl: 'https://www.nexosingenieria.com/wp-content/uploads/2020/07/b43bc7a6-c1ba-4c20-b8a1-d89720fab15b-400x284.jpg',
+    originalUrl:
+      'https://www.nexosingenieria.com/wp-content/uploads/2020/07/b43bc7a6-c1ba-4c20-b8a1-d89720fab15b-400x284.jpg',
     localPath: '/images/proyectos/53a9edd9f4fb.jpg',
     alt: 'Proyecto de eficiencia energética - Nexos Ingeniería',
     dimensions: { width: 400, height: 284 },
@@ -215,7 +219,8 @@ export const proyectosData: ProyectoImage[] = [
   {
     id: 'proyecto-5',
     filename: '7239dfc47395.jpg',
-    originalUrl: 'https://www.nexosingenieria.com/wp-content/uploads/2020/07/0538D341-FE2F-4F36-9C3B-88BC78E9FF43-400x284.jpg',
+    originalUrl:
+      'https://www.nexosingenieria.com/wp-content/uploads/2020/07/0538D341-FE2F-4F36-9C3B-88BC78E9FF43-400x284.jpg',
     localPath: '/images/proyectos/7239dfc47395.jpg',
     alt: 'Proyecto residencial - Nexos Ingeniería',
     dimensions: { width: 400, height: 284 },
@@ -223,7 +228,8 @@ export const proyectosData: ProyectoImage[] = [
   {
     id: 'proyecto-6',
     filename: '91575926b290.jpg',
-    originalUrl: 'https://www.nexosingenieria.com/wp-content/uploads/2020/07/358b488f-633f-4794-843f-79b476f31908-400x284.jpg',
+    originalUrl:
+      'https://www.nexosingenieria.com/wp-content/uploads/2020/07/358b488f-633f-4794-843f-79b476f31908-400x284.jpg',
     localPath: '/images/proyectos/91575926b290.jpg',
     alt: 'Proyecto comercial - Nexos Ingeniería',
     dimensions: { width: 400, height: 284 },
@@ -254,7 +260,8 @@ export const logoData: LogoData = {
 // ============================================================================
 
 export const seoData = {
-  title: 'Nexos Ingeniería - Especialistas en Seguridad electrónica, domótica y cableado estructurado',
+  title:
+    'Nexos Ingeniería - Especialistas en Seguridad electrónica, domótica y cableado estructurado',
   description:
     'Especialistas en Seguridad electrónica, domótica y cableado estructurado en la ciudad de Armenia Quindío. Más de 20 años de experiencia.',
   keywords: [
@@ -284,18 +291,15 @@ export const statsData = [
 export const valoresData = [
   {
     title: 'Excelencia',
-    description:
-      'Nos comprometemos con los más altos estándares de calidad en cada proyecto.',
+    description: 'Nos comprometemos con los más altos estándares de calidad en cada proyecto.',
   },
   {
     title: 'Innovación',
-    description:
-      'Adoptamos las tecnologías más avanzadas para ofrecer soluciones de vanguardia.',
+    description: 'Adoptamos las tecnologías más avanzadas para ofrecer soluciones de vanguardia.',
   },
   {
     title: 'Integridad',
-    description:
-      'Actuamos con honestidad y transparencia en todas nuestras relaciones.',
+    description: 'Actuamos con honestidad y transparencia en todas nuestras relaciones.',
   },
   {
     title: 'Compromiso',
@@ -309,8 +313,11 @@ export const valoresData = [
 // ============================================================================
 
 export const notasFaltantes = {
-  email: 'No se encontró email corporativo en el sitio web original. Se requiere solicitar al cliente.',
-  marcas: 'Solo se detectó "LG" automáticamente. El listado completo de marcas/partners requiere revisión manual.',
-  proyectosDetallados: 'Las imágenes de proyectos están disponibles pero faltan descripciones detalladas de cada uno.',
+  email:
+    'No se encontró email corporativo en el sitio web original. Se requiere solicitar al cliente.',
+  marcas:
+    'Solo se detectó "LG" automáticamente. El listado completo de marcas/partners requiere revisión manual.',
+  proyectosDetallados:
+    'Las imágenes de proyectos están disponibles pero faltan descripciones detalladas de cada uno.',
   equipo: 'No se encontró información sobre el equipo de trabajo en el sitio original.',
 };

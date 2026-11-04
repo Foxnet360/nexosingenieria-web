@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
+import { Icon } from '@/components/ui/Icon';
 import { empresaData, contactoData } from '@/data/scraped-content';
 import { processNewsletterForm, FormResponse } from '@/lib/forms/handlers';
 import { analytics } from '@/lib/analytics';
@@ -116,6 +117,26 @@ export function Footer() {
               <p className="font-[family-name:var(--font-geist-mono)]">
                 📞 {contactoData.telefono}
               </p>
+              <div className="flex items-center gap-3 pt-2">
+                <a
+                  href={contactoData.redesSociales.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-lg bg-bg-card border border-border flex items-center justify-center text-text-secondary hover:text-accent hover:border-accent/40 transition-colors"
+                  aria-label="LinkedIn Corporativo Nexos Ingeniería"
+                >
+                  <Icon name="linkedin-logo" size="sm" />
+                </a>
+                <a
+                  href={contactoData.redesSociales.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-lg bg-bg-card border border-border flex items-center justify-center text-text-secondary hover:text-accent hover:border-accent/40 transition-colors"
+                  aria-label="Instagram Oficial Nexos Ingeniería"
+                >
+                  <Icon name="instagram-logo" size="sm" />
+                </a>
+              </div>
             </div>
 
             <div className="space-y-2">
