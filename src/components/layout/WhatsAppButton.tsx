@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { WhatsappLogo } from '@phosphor-icons/react';
 import { cn } from '@/lib/utils';
+import { analytics } from '@/lib/analytics';
 
 interface WhatsAppButtonProps {
   phoneNumber?: string;
@@ -22,6 +23,7 @@ export function WhatsAppButton({
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => analytics.contactClick('whatsapp')}
       className={cn(
         'fixed bottom-20 md:bottom-6 right-6 z-40',
         'w-14 h-14 bg-green-500 rounded-full',
