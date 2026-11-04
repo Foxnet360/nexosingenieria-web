@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { sendContactEmails } from '@/lib/email/mailer';
 import { ContactFormData } from '@/lib/email/templates';
+import { saveLead, updateLeadEmailStatus } from '@/lib/leads/repository';
 
 export async function POST(request: Request) {
   try {
@@ -52,10 +53,49 @@ export async function POST(request: Request) {
       page: (payload.page || 'Contacto').trim(),
     };
 
-    const result = await sendContactEmails(contactData);
+    // Extract client IP and User-Agent for audit & spam protection
+    const forwardedFor = request.headers.get('x-forwarded-for');
+    const ip = forwardedFor
+      ? forwardedFor.split(',')[0].trim()
+      : request.headers.get('x-real-ip') || undefined;
+    const userAgent = request.headers.get('user-agent') || undefined;
 
-    return NextResponse.json(result, {
-      status: result.success ? 200 : result.configured ? 500 : 200,
+    // 1. Persistent Storage First (Zero Lead Loss)
+    const leadResult = await saveLead(contactData, { ip, userAgent });
+
+    // 2. Dispatch Email Notifications via SMTP
+    const emailResult = await sendContactEmails(contactData);
+
+    // 3. Update Email Delivery Status in DB
+    if (leadResult.id) {
+      await updateLeadEmailStatus(
+        leadResult.id,
+        emailResult.success ? 'sent' : 'failed',
+        emailResult.success ? undefined : emailResult.message
+      );
+    }
+
+    // If email succeeded, return standard success
+    if (emailResult.success) {
+      return NextResponse.json(emailResult, { status: 200 });
+    }
+
+    // If email failed but lead was safely saved in PostgreSQL, protect UX and confirm lead receipt
+    if (leadResult.success) {
+      return NextResponse.json(
+        {
+          success: true,
+          configured: emailResult.configured,
+          message:
+            '¡Tu solicitud ha sido recibida y registrada exitosamente! Nuestro equipo técnico te responderá a la brevedad.',
+        },
+        { status: 200 }
+      );
+    }
+
+    // Both email and DB persistence failed
+    return NextResponse.json(emailResult, {
+      status: emailResult.configured ? 500 : 200,
     });
   } catch (error) {
     console.error('[API contact error]:', error);

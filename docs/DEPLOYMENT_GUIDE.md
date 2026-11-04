@@ -17,6 +17,9 @@ NEXT_PUBLIC_SITE_URL=https://nexosingenieria.com
 # Google Analytics (opcional)
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 
+# Base de Datos (PostgreSQL en Railway)
+DATABASE_URL=postgresql://postgres:password@localhost:5432/railway
+
 # Configuración SMTP (cPanel)
 SMTP_HOST=mail.nexosingenieria.com
 SMTP_PORT=465
