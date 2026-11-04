@@ -32,6 +32,10 @@ function createTransporter() {
       user,
       pass,
     },
+    // Prevent unhandled hang if cPanel SMTP server drops or blocks outbound connection
+    connectionTimeout: 8000,
+    greetingTimeout: 8000,
+    socketTimeout: 8000,
     // Useful for cPanel servers where hostname might differ slightly from domain certificate
     tls: {
       rejectUnauthorized:
