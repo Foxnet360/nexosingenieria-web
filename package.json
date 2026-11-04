@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run optimize-images && npm run generate-sitemap && next build",
+    "build": "npm run generate-sitemap && next build",
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "optimize-images": "node scripts/optimize-images.js",
     "start": "next start -p ${PORT:-3000}",
@@ -12,6 +12,7 @@
     "lint:fix": "eslint --fix",
     "format": "prettier --write .",
     "type-check": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
     "prepare": "husky || true"
   },
   "engines": {

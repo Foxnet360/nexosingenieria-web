@@ -4,44 +4,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, CalendarBlank, Clock } from '@phosphor-icons/react';
 import { AnimatedElement } from '@/components/ui/AnimatedElement';
-
-const featuredPosts = [
-  {
-    title: 'Guía Completa de Cableado Estructurado para Empresas Colombianas',
-    excerpt:
-      'Parámetros ANSI/TIA-568.2-D, certificación Fluke DSX-8000 a 25 años y mejores prácticas para garantizar redes de alta disponibilidad.',
-    slug: 'guia-cableado-estructurado-empresas-colombianas',
-    date: '15 Ene 2024',
-    category: 'Cableado Estructurado',
-    readTime: '8 min',
-    image: '/images/soluciones/cableado-estructurado.webp',
-    author: 'Diego Mauricio Toro (Director de Proyectos)',
-  },
-  {
-    title: '5 Tendencias de Seguridad Electrónica para 2026',
-    excerpt:
-      'Analítica de video con IA perimetral, control de accesos biométrico sin contacto e interoperabilidad IP unificada.',
-    slug: '5-tendencias-seguridad-electronica-2026',
-    date: '10 Ene 2024',
-    category: 'Seguridad',
-    readTime: '6 min',
-    image: '/images/soluciones/seguridad-electronica.webp',
-    author: 'Diego Mauricio Toro (Director de Proyectos)',
-  },
-  {
-    title: 'Cómo Reducir el Consumo Energético en Edificios un 30%',
-    excerpt:
-      'Estrategias prácticas de automatización BMS, control lumínico DALI-2 y beneficios tributarios bajo la Ley 1715 de Colombia.',
-    slug: 'reducir-consumo-energetico-edificios',
-    date: '05 Ene 2024',
-    category: 'Eficiencia Energética',
-    readTime: '7 min',
-    image: '/images/hero-industrias.webp',
-    author: 'Javier Ramírez Tafur (Gerente)',
-  },
-];
+import { getAllBlogPosts } from '@/data/blog';
 
 export function BlogPreviewSection() {
+  const featuredPosts = getAllBlogPosts().slice(0, 3);
   return (
     <section className="py-20 md:py-32 bg-bg-secondary border-t border-border/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -75,7 +41,7 @@ export function BlogPreviewSection() {
               >
                 <div className="h-48 relative overflow-hidden bg-bg-primary">
                   <Image
-                    src={post.image}
+                    src={post.image || post.heroImage}
                     alt={post.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
@@ -109,7 +75,8 @@ export function BlogPreviewSection() {
                       {post.excerpt}
                     </p>
                     <p className="text-[11px] text-text-muted font-medium mb-3">
-                      Por <span className="text-text-secondary font-semibold">{post.author}</span>
+                      Por{' '}
+                      <span className="text-text-secondary font-semibold">{post.author.name}</span>
                     </p>
                   </div>
 
