@@ -126,11 +126,27 @@ export default function BlogPage() {
                         </p>
                       </div>
 
-                      <div className="pt-4 border-t border-border/60 flex items-center justify-between text-xs font-medium group-hover:translate-x-1 transition-transform">
-                        <span className="text-text-muted text-[11px] font-normal">
-                          {post.author.role}
-                        </span>
-                        <span className="flex items-center gap-1 font-semibold text-accent">
+                      <div className="pt-4 border-t border-border/60 flex items-center justify-between text-xs font-medium">
+                        <div className="flex items-center gap-2">
+                          {post.author.avatar ? (
+                            <div className="relative w-7 h-7 rounded-full overflow-hidden border border-accent/40 shrink-0">
+                              <Image
+                                src={post.author.avatar}
+                                alt={post.author.name}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                          ) : (
+                            <div className="w-7 h-7 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center text-[10px] font-bold text-accent shrink-0">
+                              {post.author.initials}
+                            </div>
+                          )}
+                          <span className="text-text-muted text-[11px] font-normal truncate max-w-[130px]">
+                            {post.author.name}
+                          </span>
+                        </div>
+                        <span className="flex items-center gap-1 font-semibold text-accent group-hover:translate-x-1 transition-transform">
                           Leer artículo →
                         </span>
                       </div>

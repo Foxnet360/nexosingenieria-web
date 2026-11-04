@@ -98,9 +98,20 @@ export default async function BlogPostPage({ params }: PageProps) {
 
           <AnimatedElement animation="slide-up" delay={300}>
             <div className="flex items-center gap-4 pt-4 border-t border-border/50">
-              <div className="w-12 h-12 bg-accent/20 border border-accent/40 rounded-full flex items-center justify-center font-bold text-accent text-sm tracking-wider">
-                {post.author.initials}
-              </div>
+              {post.author.avatar ? (
+                <div className="relative w-12 h-12 rounded-full overflow-hidden border border-accent/40 shrink-0">
+                  <Image
+                    src={post.author.avatar}
+                    alt={post.author.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                <div className="w-12 h-12 bg-accent/20 border border-accent/40 rounded-full flex items-center justify-center font-bold text-accent text-sm tracking-wider shrink-0">
+                  {post.author.initials}
+                </div>
+              )}
               <div>
                 <p className="text-text-primary font-medium text-sm md:text-base">
                   {post.author.name}
@@ -132,9 +143,20 @@ export default async function BlogPostPage({ params }: PageProps) {
 
           {/* Author Card */}
           <div className="bg-bg-card border border-border rounded-2xl p-6 mb-12 flex flex-col sm:flex-row items-start sm:items-center gap-5 shadow-lg shadow-black/20">
-            <div className="w-16 h-16 bg-accent/15 border border-accent/30 rounded-2xl flex items-center justify-center text-xl font-bold text-accent shrink-0">
-              {post.author.initials}
-            </div>
+            {post.author.avatar ? (
+              <div className="relative w-16 h-16 rounded-2xl overflow-hidden border border-accent/30 shrink-0">
+                <Image
+                  src={post.author.avatar}
+                  alt={post.author.name}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ) : (
+              <div className="w-16 h-16 bg-accent/15 border border-accent/30 rounded-2xl flex items-center justify-center text-xl font-bold text-accent shrink-0">
+                {post.author.initials}
+              </div>
+            )}
             <div className="flex-1">
               <div className="flex flex-wrap items-baseline gap-2 mb-1">
                 <h4 className="text-text-primary font-bold text-base">{post.author.name}</h4>

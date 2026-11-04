@@ -153,8 +153,13 @@ export default function NosotrosPage() {
             <AnimatedElement animation="slide-up" delay={200}>
               <div className="bg-bg-card border border-border rounded-2xl p-8 hover:border-accent/40 transition-colors h-full flex flex-col justify-between">
                 <div>
-                  <div className="w-16 h-16 rounded-2xl bg-accent/15 border border-accent/30 text-accent font-bold text-xl flex items-center justify-center mb-5">
-                    DT
+                  <div className="relative w-16 h-16 rounded-2xl overflow-hidden border border-accent/30 mb-5">
+                    <Image
+                      src="/images/autores/diego-toro.png"
+                      alt="Diego Mauricio Toro"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-text-primary mb-1">Diego Mauricio Toro</h3>
                   <span className="text-xs font-semibold uppercase tracking-wider text-accent block mb-3">

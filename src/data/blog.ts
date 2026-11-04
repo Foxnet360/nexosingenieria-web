@@ -3,6 +3,7 @@ export interface Author {
   role: string;
   bio: string;
   initials: string;
+  avatar?: string;
   linkedin?: string;
 }
 
@@ -26,6 +27,7 @@ const authors: Record<'javier' | 'diego', Author> = {
     role: 'Gerente General',
     bio: 'Ingeniero y líder directivo en Nexos Ingeniería SAS. Especialista en formulación de proyectos tecnológicos estratégicos, eficiencia energética BMS, modernización de instalaciones y cumplimiento normativo en Colombia.',
     initials: 'JR',
+    avatar: undefined,
     linkedin: 'https://www.linkedin.com/in/javier-andres-ramirez-tafur-91b65139/',
   },
   diego: {
@@ -33,6 +35,7 @@ const authors: Record<'javier' | 'diego', Author> = {
     role: 'Director de Proyectos',
     bio: 'Director de Proyectos e Ingeniería en Nexos Ingeniería SAS. Especialista en diseño e implementación de redes de cableado estructurado certificado, seguridad electrónica convergente, centros de datos y automatización para edificios inteligentes.',
     initials: 'DT',
+    avatar: '/images/autores/diego-toro.png',
     linkedin: 'https://www.linkedin.com/in/diegotoro/',
   },
 };

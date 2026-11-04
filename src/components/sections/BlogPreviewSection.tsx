@@ -74,10 +74,28 @@ export function BlogPreviewSection() {
                     <p className="text-text-secondary text-sm leading-relaxed mb-3 line-clamp-2">
                       {post.excerpt}
                     </p>
-                    <p className="text-[11px] text-text-muted font-medium mb-3">
-                      Por{' '}
-                      <span className="text-text-secondary font-semibold">{post.author.name}</span>
-                    </p>
+                    <div className="flex items-center gap-2 mb-3">
+                      {post.author.avatar ? (
+                        <div className="relative w-6 h-6 rounded-full overflow-hidden border border-accent/40 shrink-0">
+                          <Image
+                            src={post.author.avatar}
+                            alt={post.author.name}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-6 h-6 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center text-[10px] font-bold text-accent shrink-0">
+                          {post.author.initials}
+                        </div>
+                      )}
+                      <p className="text-[11px] text-text-muted font-medium truncate">
+                        Por{' '}
+                        <span className="text-text-secondary font-semibold">
+                          {post.author.name}
+                        </span>
+                      </p>
+                    </div>
                   </div>
 
                   <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent group-hover:gap-2 transition-all pt-2 border-t border-border/40">
