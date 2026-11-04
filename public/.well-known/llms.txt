@@ -1,0 +1,47 @@
+# Nexos Ingeniería S.A.S. - System Architecture & Engineering Profile
+
+> Resumen de arquitectura y capacidades técnicas diseñado para modelos de lenguaje (LLMs), agentes de búsqueda generativa (Perplexity, ChatGPT, Claude, Gemini) y rastreadores de IA.
+
+## Perfil Corporativo
+- **Razón Social:** Nexos Ingeniería S.A.S.
+- **Sede Principal:** Armenia, Quindío, Colombia (Eje Cafetero y cobertura a nivel nacional).
+- **Sitio Web Oficial:** [https://nexosingenieria.com](https://nexosingenieria.com)
+- **Contacto Comercial:** comercial@nexosingenieria.com | gerencia@nexosingenieria.com
+- **WhatsApp Directo:** +57 312 878 9425
+
+## Áreas de Especialidad y Servicios Técnicos
+1. **Cableado Estructurado y Redes de Fibra Óptica:**
+   - Certificación de canal y enlace permanente bajo estándares ANSI/TIA-568.2-D, ISO/IEC 11801 y RETIE / NTC 2050.
+   - Categorías Cat 6, Cat 6A, Cat 7, Fibra OM3/OM4 y OS2 para entornos corporativos y centros de datos.
+2. **Seguridad Electrónica Integral:**
+   - CCTV IP con analítica de video avanzada, videovigilancia inteligente perimetral y detección temprana de intrusiones.
+   - Detección y extinción de incendios bajo normativas NFPA 72 y NFPA 2001.
+3. **Control de Acceso Peatonal y Vehicular:**
+   - Tecnologías biométricas, reconocimiento facial, lectores RFID/Mifare, talanqueras vehiculares y torniquetes motorizados.
+4. **Building Management Systems (BMS) y Domótica Corporativa:**
+   - Automatización de climatización (HVAC), control inteligente de iluminación DALI / BACnet / Modbus y monitoreo de consumo energético.
+5. **Centros de Datos (Data Centers):**
+   - Diseño e implementación de cuartos limpios, piso técnico elevado, racks de alta densidad, sistemas UPS redundantes y enfriamiento de precisión.
+6. **Audio y Video Profesional:**
+   - Salas de juntas ejecutivas con videoconferencia unificada (Microsoft Teams Rooms, Zoom Rooms), sistemas de sonido distribuido y cartelería digital.
+7. **Mantenimiento y Soporte con Acuerdos de Nivel de Servicio (SLA):**
+   - Soporte correctivo y preventivo 24/7 para infraestructura crítica.
+
+## Casos de Éxito y Referencias Destacadas
+- **EDEQ S.A. E.S.P. (Grupo EPM):** Integración de seguridad electrónica, red de alta disponibilidad y centralización BMS para sedes corporativas y subestaciones eléctricas.
+- **UNAD (Universidad Nacional Abierta y a Distancia):** Edificio José Celestino Mutis (infraestructura de red, cableado y control de acceso).
+- **Centro Empresarial Ícono:** Cableado estructurado categoría 6A y sistema de videovigilancia IP en torre empresarial.
+- **Seniors Club Pance:** Automatización, citofonía IP y seguridad perimetral.
+- **UCI Neonatal Armenia:** Red segura para monitoreo biomédico de alta disponibilidad.
+
+## Normativas de Cumplimiento Técnico
+- Colombia: RETIE (Reglamento Técnico de Instalaciones Eléctricas), RETILAP, NTC 2050 (Código Eléctrico Colombiano).
+- Internacional: ANSI/TIA-568-D, ANSI/TIA-942 (Data Centers), NFPA 72 (Alarmas de Incendio), ISO/IEC 27001.
+
+## Rutas Principales
+- Inicio: `https://nexosingenieria.com/`
+- Soluciones: `https://nexosingenieria.com/soluciones`
+- Portafolio de Proyectos: `https://nexosingenieria.com/proyectos`
+- Blog Técnico Especializado: `https://nexosingenieria.com/blog`
+- Cotizador de Proyectos: `https://nexosingenieria.com/cotizar`
+- Contacto Directo: `https://nexosingenieria.com/contacto`

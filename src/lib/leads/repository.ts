@@ -1,6 +1,25 @@
 import { getDbPool, ensureDatabaseSchema } from '@/lib/db';
 import { LeadInput, LeadMetadata, SaveLeadResult } from './types';
 
+export interface StoredLead {
+  id: string;
+  created_at: string;
+  updated_at: string;
+  page: string;
+  name: string | null;
+  email: string;
+  phone: string | null;
+  company: string | null;
+  service: string | null;
+  project_size: string | null;
+  budget: string | null;
+  message: string | null;
+  email_status: 'pending' | 'sent' | 'failed';
+  email_error: string | null;
+  ip_address: string | null;
+  user_agent: string | null;
+}
+
 /**
  * Persists an incoming lead into PostgreSQL.
  * If database is not configured (e.g. local dev without DB), it logs and returns gracefully.
@@ -90,5 +109,44 @@ export async function updateLeadEmailStatus(
     await db.query(query, [status, error || null, id]);
   } catch (err) {
     console.error(`[Lead Repository Error] updateLeadEmailStatus failed for ${id}:`, err);
+  }
+}
+
+/**
+ * Retrieves all leads ordered by newest first with optional search.
+ */
+export async function getAllLeads(limit = 100): Promise<StoredLead[]> {
+  const db = getDbPool();
+  if (!db) {
+    return [];
+  }
+
+  try {
+    await ensureDatabaseSchema();
+    const result = await db.query(
+      `SELECT * FROM contact_leads ORDER BY created_at DESC LIMIT $1;`,
+      [limit]
+    );
+    return result.rows as StoredLead[];
+  } catch (err) {
+    console.error('[Lead Repository Error] getAllLeads failed:', err);
+    return [];
+  }
+}
+
+/**
+ * Deletes a lead by ID.
+ */
+export async function deleteLead(id: string): Promise<boolean> {
+  const db = getDbPool();
+  if (!db) return false;
+
+  try {
+    await ensureDatabaseSchema();
+    const result = await db.query('DELETE FROM contact_leads WHERE id = $1', [id]);
+    return (result.rowCount ?? 0) > 0;
+  } catch (err) {
+    console.error('[Lead Repository Error] deleteLead failed:', err);
+    return false;
   }
 }
