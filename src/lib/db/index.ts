@@ -21,9 +21,10 @@ export function getDbPool(): Pool | null {
 
     const config: PoolConfig = {
       connectionString,
-      max: 10,
-      idleTimeoutMillis: 30000,
+      max: 3,
+      idleTimeoutMillis: 10000,
       connectionTimeoutMillis: 5000,
+      allowExitOnIdle: true,
     };
 
     if (isSsl) {

@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+.git
+.codegraph
+.husky
+tests
+docs
+openspec
+*.md
+*.tsbuildinfo
+.env.local
+.env.*.local
+coverage
+.nyc_output
